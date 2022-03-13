@@ -28,17 +28,17 @@ class App extends React.Component{
     }
     renderTeam(team) {
         return (
-            <NavDropdown.Item eventKey={team.name}
-                              onClick={()=>this.handleSelectedTeam(team.name)}>
+            <NavDropdown.Item eventKey={team.name}>
                 {team.name}
             </NavDropdown.Item>
         )
     }
-        handleSelectedTeam(selected_team){
+    handleSelectedTeam(selected_team){
+        console.log("blabla")
         this.setState({selectedKey: selected_team,
-                            selectedTeam: selected_team})
+                selectedTeam: selected_team})
         }
-        handleSelected(selectedKey) {
+    handleSelected(selectedKey) {
         console.log(`HandleSelected ${selectedKey}`)
         this.setState({selectedKey: selectedKey})
     }
@@ -52,8 +52,6 @@ class App extends React.Component{
                 return <TopAssists selected_key={this.state.selectedKey}/>
             case "matches":
                 return <Matches/>
-            case "team":
-                return <TeamDetails team={this.state.selectedTeam}/>
             case this.state.selectedTeam:
                 return <TeamDetails team={this.state.selectedTeam}/>
             default:
@@ -68,7 +66,7 @@ class App extends React.Component{
              <>
                 <Nav variant="pills" onSelect={this.handleSelected}>
                   <Nav.Item>
-                    <Nav.Link eventKey="1" href="#/home" disabled={true}>
+                    <Nav.Link eventKey="1" href="" disabled={true}>
                       <img className={'home-icon'} alt={''} src={'sport_wow.jpg'}/>
                     </Nav.Link>
                   </Nav.Item>
@@ -77,7 +75,7 @@ class App extends React.Component{
                       Matches
                     </Nav.Link>
                   </Nav.Item>
-                  <NavDropdown title="Teams" id="nav-dropdown">
+                  <NavDropdown title="Teams" id="nav-dropdown" onSelect={this.handleSelectedTeam}>
                       {teamsObjects}
                   </NavDropdown>
                   <NavDropdown title="Leagues" id="nav-dropdown" onSelect={this.handleSelected}>
