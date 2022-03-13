@@ -36,3 +36,17 @@
     transform: rotate(360deg);
   }
 }
+.table-icon{
+  width: 60px;
+}
+.table-icon-league{
+  width: 30px;
+}
+.home-icon{
+  width: 200px;
+}
+.center {
+  margin: auto;
+  width: 20%;
+  padding: 10px;
+}
