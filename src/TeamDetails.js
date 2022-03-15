@@ -8,7 +8,8 @@ export  class TeamDetails extends React.Component{
             team: {},
             stadium:{},
             league:{},
-            coach: {}
+            coach: {},
+            crowd: 0
         }
     }
     componentDidMount() {
@@ -23,7 +24,10 @@ export  class TeamDetails extends React.Component{
             .get('http://127.0.0.1:8000/api/v1/team_coach/' + this.props.team.replace(" ", "%20"))
             .then(res => this.setState({
                 coach: res.data.coach}))
-        console.log(this.state.coach)
+                axios
+            .get('http://127.0.0.1:8000/api/v1/stats/crowd_avg?team=' + this.props.team.replace(" ", "%20"))
+            .then(res => this.setState({
+                crowd: res.data[0]}))
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -49,11 +53,10 @@ export  class TeamDetails extends React.Component{
                             <ListGroupItem>
                                 Play home games in {this.state.stadium.name} ({this.state.stadium.capacity})
                             </ListGroupItem>
+                              <ListGroupItem>
+                                Average crowd in games {this.state.crowd.avg}
+                            </ListGroupItem>
                           </ListGroup>
-                          <Card.Body>
-                            <Card.Link href="#"><img className={'home-icon'} src={this.state.league.picture_url}/> </Card.Link>
-                            <Card.Link href="#">{}</Card.Link>
-                          </Card.Body>
                         </Card>
                     </div>
                     <div className={'float-child'}>
@@ -64,6 +67,9 @@ export  class TeamDetails extends React.Component{
                             <Card.Text>
                               Active coach of {this.state.team.name}
                             </Card.Text>
+                              <Card.Body>
+                            <Card.Link href="#"><img className={'home-icon'} src={this.state.league.picture_url}/> </Card.Link>
+                          </Card.Body>
                           </Card.Body>
                         </Card>
                     </div>
