@@ -12,12 +12,19 @@ export  class TeamDetails extends React.Component{
     }
     componentDidMount() {
         axios
-            .get('http://127.0.0.1:8000/api/v1/teams/'+ this.props.team.replace(" ", "%20"))
-            .then(res =>this.setState({team:res.data,
-                                            stadium:res.data.stadium,
-                                            league:res.data.league}))
-
+            .get('http://127.0.0.1:8000/api/v1/teams/' + this.props.team.replace(" ", "%20"))
+            .then(res => this.setState({
+                team: res.data,
+                stadium: res.data.stadium,
+                league: res.data.league
+            }))
     }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevProps.team !== this.props.team)
+        this.componentDidMount()
+    }
+
     render() {
         return(
                 <div className={'center'}>

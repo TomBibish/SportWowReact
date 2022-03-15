@@ -10,7 +10,7 @@ export  class TopAssists extends React.Component{
     }
     componentDidMount() {
         axios
-            .get('http://127.0.0.1:8000/api/v1/stats/assists_leader?league=1')
+            .get('http://127.0.0.1:8000/api/v1/stats/assists_leader?league=' + this.props.league)
             .then(res =>this.setState({top_assists:res.data}))
         console.log('top_assists' + this.state.top_assists)
 

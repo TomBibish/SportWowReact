@@ -9,8 +9,9 @@ export  class LeagueTable extends React.Component{
         }
     }
     componentDidMount() {
+
         axios
-            .get('http://127.0.0.1:8000/api/v1/stats/league_table?league=1')
+            .get('http://127.0.0.1:8000/api/v1/stats/league_table?league=' +this.props.league)
             .then(res =>this.setState({league_table:res.data}))
 
     }

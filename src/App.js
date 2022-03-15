@@ -14,17 +14,23 @@ class App extends React.Component{
         super(props);
         this.state = {
             selectedKey: '',
-            selectedTeam: 'Maccabi Tel Aviv',
-            teams:[]}
+            selectedTeam: 'HapoelNofHaglil',
+            teams:[],
+            leagues:[],
+            selectedLeague:1}
+
         this.handleSelected = this.handleSelected.bind(this)
         this.handleSelectedTeam = this.handleSelectedTeam.bind(this)
+        this.handleSelectedLeague = this.handleSelectedLeague.bind(this)
         this.renderTeam = this.renderTeam.bind(this)
     }
     componentDidMount() {
         axios
             .get('http://127.0.0.1:8000/api/v1/stats/league_table?league=1')
             .then(res =>this.setState({teams:res.data}))
-
+        axios
+            .get('http://127.0.0.1:8000/api/v1/leagues')
+            .then(res =>this.setState({leagues:res.data}))
     }
     renderTeam(team) {
         return (
@@ -33,10 +39,22 @@ class App extends React.Component{
             </NavDropdown.Item>
         )
     }
+    renderLeague(league) {
+        return (
+            <NavDropdown.Item eventKey={league.id}>
+                {league.name}
+            </NavDropdown.Item>
+        )
+    }
     handleSelectedTeam(selected_team){
-        console.log("blabla")
         this.setState({selectedKey: selected_team,
-                selectedTeam: selected_team})
+                            selectedTeam: selected_team})
+        }
+    handleSelectedLeague(selected_league){
+        console.log(selected_league)
+        this.setState({selectedKey: selected_league,
+                            selectedLeague: selected_league})
+
         }
     handleSelected(selectedKey) {
         console.log(`HandleSelected ${selectedKey}`)
@@ -47,13 +65,15 @@ class App extends React.Component{
             case "leagues":
                 return <LeagueTable handleSelected={this.handleSelected}/>
             case "top_scorers":
-                return <TopScorers selected_key={this.state.selectedKey}/>
+                return <TopScorers league={this.state.selectedLeague} selected_key={this.state.selectedKey}/>
             case "top_assists":
-                return <TopAssists selected_key={this.state.selectedKey}/>
+                return <TopAssists league={this.state.selectedLeague} selected_key={this.state.selectedKey}/>
             case "matches":
                 return <Matches/>
             case this.state.selectedTeam:
                 return <TeamDetails team={this.state.selectedTeam}/>
+            case this.state.selectedLeague:
+                 return <LeagueTable league = {this.state.selectedLeague} handleSelected={this.handleSelected}/>
             default:
                 return null
         }
@@ -62,6 +82,8 @@ class App extends React.Component{
     render() {
         let teamsObjects = this.state.teams.map(
             this.renderTeam)
+        let leagueObjects = this.state.leagues.map(
+            this.renderLeague)
          return (
              <>
                 <Nav variant="pills" onSelect={this.handleSelected}>
@@ -78,10 +100,8 @@ class App extends React.Component{
                   <NavDropdown title="Teams" id="nav-dropdown" onSelect={this.handleSelectedTeam}>
                       {teamsObjects}
                   </NavDropdown>
-                  <NavDropdown title="Leagues" id="nav-dropdown" onSelect={this.handleSelected}>
-                    <NavDropdown.Item eventKey="leagues">
-                        Israeli Premier League
-                    </NavDropdown.Item>
+                  <NavDropdown title="Leagues" id="nav-dropdown" onSelect={this.handleSelectedLeague}>
+                      {leagueObjects}
                   </NavDropdown>
                 </Nav>
                  <br/>

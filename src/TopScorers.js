@@ -10,7 +10,7 @@ export  class TopScorers extends React.Component{
     }
     componentDidMount() {
         axios
-            .get('http://127.0.0.1:8000/api/v1/stats/goals_leader?league=1')
+            .get('http://127.0.0.1:8000/api/v1/stats/goals_leader?league=' + this.props.league)
             .then(res =>this.setState({top_scorers:res.data}))
         console.log('top_scorers' + this.state.top_scorers)
 
