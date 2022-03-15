@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from "axios";
-import {Card, ListGroup, ListGroupItem} from "react-bootstrap";
+import {Card, Carousel, ListGroup, ListGroupItem} from "react-bootstrap";
 export  class TeamDetails extends React.Component{
     constructor(props) {
         super(props);
@@ -39,7 +39,7 @@ export  class TeamDetails extends React.Component{
         return(
                 <div className={'float-container '}>
                     <div className={'float-child'}>
-                        <Card style={{ width: '18rem' }}>
+                        <Card style={{ width: '18rem', height:'26rem' }}>
                           <Card.Img variant="top" src={this.state.team.picture_url} />
                           <Card.Body>
                             <Card.Title>{this.state.team.name}</Card.Title>
@@ -60,7 +60,7 @@ export  class TeamDetails extends React.Component{
                         </Card>
                     </div>
                     <div className={'float-child'}>
-                        <Card style={{ width: '18rem' }}>
+                        <Card style={{ width: '18rem', height:'26rem' }}>
                           <Card.Img variant="top" src={this.state.coach.picture_url} />
                           <Card.Body>
                             <Card.Title>{this.state.coach.first_name} {this.state.coach.last_name}</Card.Title>

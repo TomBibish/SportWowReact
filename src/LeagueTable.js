@@ -43,7 +43,7 @@ export  class LeagueTable extends React.Component{
                     </Button>
                 </ButtonGroup>
                 </div>
-                <Table style={{'textAlign': 'center'}} striped bordered hover>
+                <Table style={{'textAlign': 'center'}} striped bordered hover >
                       <thead>
                         <tr>
                           <th> </th>
