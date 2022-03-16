@@ -100,7 +100,7 @@ class App extends React.Component{
                   <NavDropdown title="Teams" id="nav-dropdown" onSelect={this.handleSelectedTeam}>
                       {teamsObjects}
                   </NavDropdown>
-                  <NavDropdown title="Leagues" id="nav-dropdown" onSelect={this.handleSelectedLeague}>
+                  <NavDropdown title="Tables" id="nav-dropdown" onSelect={this.handleSelectedLeague}>
                       {leagueObjects}
                   </NavDropdown>
                 </Nav>

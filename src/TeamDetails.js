@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from "axios";
-import {Card, Carousel, ListGroup, ListGroupItem} from "react-bootstrap";
+import {Card, Carousel, ListGroup, ListGroupItem, Table} from "react-bootstrap";
 export  class TeamDetails extends React.Component{
     constructor(props) {
         super(props);
@@ -9,7 +9,8 @@ export  class TeamDetails extends React.Component{
             stadium:{},
             league:{},
             coach: {},
-            crowd: 0
+            crowd: 0,
+            players: []
         }
     }
     componentDidMount() {
@@ -24,18 +25,38 @@ export  class TeamDetails extends React.Component{
             .get('http://127.0.0.1:8000/api/v1/team_coach/' + this.props.team.replace(" ", "%20"))
             .then(res => this.setState({
                 coach: res.data.coach}))
-                axios
+        axios
             .get('http://127.0.0.1:8000/api/v1/stats/crowd_avg?team=' + this.props.team.replace(" ", "%20"))
             .then(res => this.setState({
                 crowd: res.data[0]}))
+        axios
+            .get('http://127.0.0.1:8000/api/v1/teams/'+ this.props.team.replace(" ", "%20") + '/players')
+            .then(res => this.setState({
+                players: res.data}))
+        console.log(this.state.players)
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (prevProps.team !== this.props.team)
         this.componentDidMount()
     }
+    renderPlayer(player) {
+        return (
+            <tr>
+                <td><img className={'table-icon-league'} src={player.picture} alt={''}/></td>
+                <td>{player.name}</td>
+                <td>{player.appearances}</td>
+                <td>{player.goals}</td>
+                <td>{player.assists}</td>
+                <td>{player.yellow_cards}</td>
+                <td>{player.red_cards}</td>
+            </tr>
+        )
+    }
 
     render() {
+        let playerObjects = this.state.players.map(
+            this.renderPlayer)
         return(
                 <div className={'float-container '}>
                     <div className={'float-child'}>
@@ -72,6 +93,38 @@ export  class TeamDetails extends React.Component{
                           </Card.Body>
                           </Card.Body>
                         </Card>
+                    </div>
+                    <div className={'float-child'}>
+                                <Table style={{'textAlign': 'center'}} striped bordered hover >
+                      <thead>
+                        <tr>
+                          <th>
+                              <img alt={''} className={'player-table-icon'} src={'https://cdn-icons.flaticon.com/png/128/5281/premium/5281619.png?token=exp=1647464261~hmac=350c3465c65bfac48e8dac60932b3484'}/>
+                          </th>
+                          <th>
+                              <img alt={''} className={'player-table-icon'} src={'https://cdn-icons-png.flaticon.com/128/27/27221.png'}/>
+                          </th>
+                          <th>
+                              <img alt={''} className={'player-table-icon'} src={'https://cdn-icons.flaticon.com/png/128/4074/premium/4074301.png?token=exp=1647462875~hmac=7fc8221c173261a5c658b454ed86ce39'}/>
+                          </th>
+                          <th>
+                              <img alt={''} className={"player-table-icon"} src={'https://cdn-icons-png.flaticon.com/128/1165/1165218.png'}/>
+                          </th>
+                          <th>
+                              <img alt={''} className={"player-table-icon"} src={'https://cdn-icons.flaticon.com/png/512/5370/premium/5370178.png?token=exp=1647462396~hmac=ba438e0148d61f096f74e561c8105f9c'}/>
+                          </th>
+                          <th>
+                              <img alt={''} className={"player-table-icon"} src={'https://cdn-icons.flaticon.com/png/512/5174/premium/5174382.png?token=exp=1647462497~hmac=aa9006958be21691108f58f865f757e4'}/>
+                          </th>
+                          <th>
+                              <img alt={''} className={"player-table-icon"} src={'https://cdn-icons.flaticon.com/png/512/5174/premium/5174171.png?token=exp=1647462484~hmac=5668dba2bc6c939f55a5c942267713c9'}/>
+                          </th>
+                        </tr>
+                      </thead>
+                    <tbody>
+                        {playerObjects}
+                    </tbody>
+                </Table>
                     </div>
                 </div>
         )

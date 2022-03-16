@@ -58,8 +58,6 @@ export  class LeagueTable extends React.Component{
                     </tbody>
                 </Table>
                 <br/>
-
-
             </>
         )
     }

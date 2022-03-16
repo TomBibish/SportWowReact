@@ -56,7 +56,12 @@
 }
 
 .float-child {
-    width: 50%;
+    width: 33%;
     float: left;
     padding: 10px;
+}
+* {font-family: sans-serif}
+
+.player-table-icon{
+  width: 20px;
 }
