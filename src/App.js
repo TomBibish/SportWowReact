@@ -8,6 +8,7 @@ import {TopAssists} from "./TopAssists";
 import {Matches} from "./Matches";
 import axios from "axios";
 import {TeamDetails} from "./TeamDetails";
+import {ComparePlayers} from "./ComparePlayers";
 
 class App extends React.Component{
     constructor(props) {
@@ -70,6 +71,8 @@ class App extends React.Component{
                 return <TopAssists league={this.state.selectedLeague} selected_key={this.state.selectedKey}/>
             case "matches":
                 return <Matches/>
+            case "compere_players":
+                return <ComparePlayers league={this.state.selectedLeague} selected_key={this.state.selectedKey}/>
             case this.state.selectedTeam:
                 return <TeamDetails team={this.state.selectedTeam}/>
             case this.state.selectedLeague:
@@ -88,7 +91,7 @@ class App extends React.Component{
              <>
                 <Nav variant="pills" onSelect={this.handleSelected}>
                   <Nav.Item>
-                    <Nav.Link eventKey="1" href="" disabled={true}>
+                    <Nav.Link href="" disabled={true}>
                       <img className={'home-icon'} alt={''} src={'sport_wow.jpg'}/>
                     </Nav.Link>
                   </Nav.Item>

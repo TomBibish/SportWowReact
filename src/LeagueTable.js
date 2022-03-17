@@ -34,12 +34,16 @@ export  class LeagueTable extends React.Component{
                 <div className={'center'}>
                 <ButtonGroup aria-label="Basic example">
                     <Button onClick={()=>this.props.handleSelected('top_scorers')}
-                            variant="secondary" size={'lg'}>
+                            variant="secondary" >
                         Top Scorers
                     </Button>
                     <Button onClick={()=>this.props.handleSelected('top_assists')}
-                            variant="secondary" size={'lg'}>
+                            variant="secondary" >
                         Top Assists
+                    </Button>
+                    <Button onClick={()=>this.props.handleSelected('compere_players')}
+                            variant="secondary" >
+                        Compare Players
                     </Button>
                 </ButtonGroup>
                 </div>
