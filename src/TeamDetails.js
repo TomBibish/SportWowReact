@@ -60,7 +60,7 @@ export  class TeamDetails extends React.Component{
         return(
                 <div className={'float-container '}>
                     <div className={'float-child'}>
-                        <Card style={{ width: '18rem', height:'26rem' }}>
+                        <Card style={{ width: '18rem', height:'26rem'}}>
                           <Card.Img variant="top" src={this.state.team.picture_url} />
                           <Card.Body>
                             <Card.Title>{this.state.team.name}</Card.Title>

@@ -50,6 +50,11 @@
   width: 20%;
   padding: 10px;
 }
+.center-buttons {
+  margin: auto;
+  width: 27%;
+  padding: 15px;
+}
 .float-container {
     margin: auto;
     padding: 10px;
@@ -64,4 +69,15 @@
 
 .player-table-icon{
   width: 20px;
+}
+.blue-button{
+     background: linear-gradient(to right,#2e5178 0,#448bc4 71%,#386a9c 100%);
+}
+.blue-tr{
+     background: linear-gradient(to right,#2e5178 0,#448bc4 71%,#386a9c 100%);
+     color: whitesmoke;
+}
+.blue-tr-head{
+     background: linear-gradient(to left,#2e5178 0,#448bc4 71%,#386a9c 100%);
+     color: whitesmoke;
 }

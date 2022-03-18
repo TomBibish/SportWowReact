@@ -17,7 +17,7 @@ export  class LeagueTable extends React.Component{
     }
     renderTeam(team) {
         return (
-            <tr>
+            <tr className={'blue-tr'}>
                 <td><img className={'table-icon-league'} src={team.picture} alt={''}/></td>
                 <td>{team.name}</td>
                 <td>{team.points}</td>
@@ -31,25 +31,23 @@ export  class LeagueTable extends React.Component{
             this.renderTeam)
         return(
             <>
-                <div className={'center'}>
-                <ButtonGroup aria-label="Basic example">
+                <div className={'center-buttons'}>
                     <Button onClick={()=>this.props.handleSelected('top_scorers')}
-                            variant="secondary" >
+                             className={'blue-button'}>
                         Top Scorers
                     </Button>
                     <Button onClick={()=>this.props.handleSelected('top_assists')}
-                            variant="secondary" >
+                            className={'blue-button'}>
                         Top Assists
                     </Button>
-                    <Button onClick={()=>this.props.handleSelected('compere_players')}
-                            variant="secondary" >
+                    <Button onClick={()=>this.props.handleSelected('compere_players')} className={'blue-button'}>
                         Compare Players
                     </Button>
-                </ButtonGroup>
                 </div>
-                <Table style={{'textAlign': 'center'}} striped bordered hover >
+                <br/>
+                <Table style={{'textAlign': 'center'}}  bordered hover >
                       <thead>
-                        <tr>
+                        <tr className={'blue-tr-head'}>
                           <th> </th>
                           <th>Team</th>
                           <th>Points</th>

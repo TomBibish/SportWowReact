@@ -111,13 +111,13 @@ export  class ComparePlayers extends React.Component{
                         <div className={'float-child'}>
                             <h1>Compare Players</h1>
                                 <ButtonGroup>
-                                <DropdownButton id="dropdown-basic-button" title={this.state.player1_name} onSelect={this.handleSelectedPlayer1}>
+                                <DropdownButton  id="dropdown-basic-button" title={this.state.player1_name} onSelect={this.handleSelectedPlayer1}>
                                     {playersObjects}
                                 </DropdownButton>
-                                    <Button variant="secondary" onClick={()=>this.GetPlayersDetails()}>
+                                    <Button  className={'blue-button'} onClick={()=>this.GetPlayersDetails()}>
                                         Compare
                                     </Button>
-                                <DropdownButton id="dropdown-basic-button" title={this.state.player2_name} onSelect={this.handleSelectedPlayer2}>
+                                <DropdownButton  id="dropdown-basic-button" title={this.state.player2_name} onSelect={this.handleSelectedPlayer2}>
                                     {playersObjects}
                                 </DropdownButton>
                                 </ButtonGroup>

@@ -1,6 +1,9 @@
 import React from 'react';
 import axios from "axios";
 import {Button, ButtonGroup, Table} from "react-bootstrap";
+import YouTube from "react-youtube";
+
+
 export  class Matches extends React.Component{
     constructor(props) {
         super(props);
@@ -23,9 +26,18 @@ export  class Matches extends React.Component{
                 <td>{match.home_score}:{match.away_score}</td>
                 <td><img className={'table-icon'} alt={''} src={match.away_team.picture_url}/></td>
                 <td>{match.attendance}</td>
+                <td>
+                    <iframe title="Embeds Page" className="embed-responsive-item"
+                            src={match.link}
+                            allowFullScreen
+                            height={'140px'}
+                            width={'250px'}>
+                    </iframe>
+                </td>
             </tr>
         )
     }
+
     render() {
         let matchObjects = this.state.matches.map(
             this.renderMatch)
@@ -40,6 +52,7 @@ export  class Matches extends React.Component{
                           <th>Score</th>
                           <th>Away Team</th>
                           <th>Attendance</th>
+                          <th>Game summary</th>
                         </tr>
                       </thead>
                     <tbody>
