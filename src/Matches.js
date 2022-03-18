@@ -19,7 +19,7 @@ export  class Matches extends React.Component{
     }
     renderMatch(match) {
         return (
-            <tr>
+            <tr  className={'blue-tr-head'}>
                 <td>{match.round}</td>
                 <td>{match.game_date}</td>
                 <td><img className={'table-icon'} alt={''} src={match.home_team.picture_url}/></td>
@@ -43,9 +43,9 @@ export  class Matches extends React.Component{
             this.renderMatch)
         return(
             <>
-                <Table style={{'textAlign': 'center'}} striped bordered hover>
+                <Table style={{'textAlign': 'center', 'border': "#7A91B1"}} bordered hover>
                       <thead>
-                        <tr>
+                        <tr  className={'blue-tr-head'}>
                           <th>Round</th>
                           <th>Date</th>
                           <th>Home Team</th>

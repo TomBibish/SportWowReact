@@ -95,7 +95,9 @@ export  class TeamDetails extends React.Component{
                         </Card>
                     </div>
                     <div className={'float-child'}>
-                                <Table style={{'textAlign': 'center'}} striped bordered hover >
+                                <Table style={{'textAlign': 'center',
+                                    'border': this.state.team.color1,
+                                'color':this.state.team.color2}} bordered hover>
                       <thead>
                         <tr>
                           <th>

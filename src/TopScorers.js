@@ -17,7 +17,7 @@ export  class TopScorers extends React.Component{
     }
     renderPlayer(player) {
         return (
-            <tr>
+            <tr className={'blue-tr'}>
                 <td><img className={'rounded-circle table-icon'}  src={player.picture} alt={''}/></td>
                 <td>{player.name}</td>
                 <td>{player.team}</td>
@@ -31,20 +31,22 @@ export  class TopScorers extends React.Component{
         )
         return(
             <>
-                <Table style={{'textAlign': 'center'}} striped bordered hover>
-                      <thead>
-                        <tr>
-                          <th> </th>
-                          <th>Name</th>
-                          <th>Team</th>
-                          <th>Goals</th>
-                        </tr>
-                      </thead>
-                    <tbody>
-                    {playersObjects}
-                    </tbody>
-                </Table>
-                <br/>
+                <div className={'center'} style={{'width': '40%'}}>
+                    <Table style={{'textAlign': 'center', 'border': "#7A91B1"}}  bordered hover>
+                          <thead>
+                            <tr className={'blue-tr'}>
+                              <th> </th>
+                              <th>Name</th>
+                              <th>Team</th>
+                              <th>Goals</th>
+                            </tr>
+                          </thead>
+                        <tbody>
+                        {playersObjects}
+                        </tbody>
+                    </Table>
+                    <br/>
+                </div>
             </>
         )
     }
