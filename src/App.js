@@ -10,6 +10,7 @@ import axios from "axios";
 import {TeamDetails} from "./TeamDetails";
 import {ComparePlayers} from "./ComparePlayers";
 import {LoginForm} from "./LoginForm";
+import {SignoutForm} from "./SignOutForm";
 
 class App extends React.Component{
     constructor(props) {
@@ -98,7 +99,7 @@ class App extends React.Component{
                     </Nav.Link>
                   </Nav.Item>
                   <Nav.Item>
-                    <Nav.Link eventKey=""  title="Item" onClick={() => this.setState({show_login_form: true})}>
+                    <Nav.Link title="Item" onClick={() => this.setState({show_login_form: true})}>
                       Sign In
                     </Nav.Link>
                   </Nav.Item>
@@ -113,15 +114,12 @@ class App extends React.Component{
                   <NavDropdown title="Tables" id="nav-dropdown" onSelect={this.handleSelectedLeague}>
                       {leagueObjects}
                   </NavDropdown>
-                    <Nav.Item>
-                    <Nav.Link eventKey=""  title="Item" onClick={() => this.setState({show_login_form: true})}>
-                      Sign Out
-                    </Nav.Link>
-                  </Nav.Item>
+                    <SignoutForm/>
                 </Nav>
                  <br/>
                 {this.renderMainView()}
                  <LoginForm show={this.state.show_login_form} onHide={() => this.setState({show_login_form: false})}/>
+
              </>
 
         )
