@@ -9,6 +9,7 @@ import {Matches} from "./Matches";
 import axios from "axios";
 import {TeamDetails} from "./TeamDetails";
 import {ComparePlayers} from "./ComparePlayers";
+import {LoginForm} from "./LoginForm";
 
 class App extends React.Component{
     constructor(props) {
@@ -18,7 +19,8 @@ class App extends React.Component{
             selectedTeam: 'HapoelNofHaglil',
             teams:[],
             leagues:[],
-            selectedLeague:1}
+            selectedLeague:1,
+            'show_login_form': false}
 
         this.handleSelected = this.handleSelected.bind(this)
         this.handleSelectedTeam = this.handleSelectedTeam.bind(this)
@@ -96,6 +98,11 @@ class App extends React.Component{
                     </Nav.Link>
                   </Nav.Item>
                   <Nav.Item>
+                    <Nav.Link eventKey=""  title="Item" onClick={() => this.setState({show_login_form: true})}>
+                      Sign In
+                    </Nav.Link>
+                  </Nav.Item>
+                  <Nav.Item>
                     <Nav.Link eventKey="matches"  title="Item">
                       Matches
                     </Nav.Link>
@@ -106,9 +113,15 @@ class App extends React.Component{
                   <NavDropdown title="Tables" id="nav-dropdown" onSelect={this.handleSelectedLeague}>
                       {leagueObjects}
                   </NavDropdown>
+                    <Nav.Item>
+                    <Nav.Link eventKey=""  title="Item" onClick={() => this.setState({show_login_form: true})}>
+                      Sign Out
+                    </Nav.Link>
+                  </Nav.Item>
                 </Nav>
                  <br/>
                 {this.renderMainView()}
+                 <LoginForm show={this.state.show_login_form} onHide={() => this.setState({show_login_form: false})}/>
              </>
 
         )
