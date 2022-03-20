@@ -36,12 +36,12 @@ export  class LeagueTable extends React.Component{
                              className={'blue-button'}>
                         Top Scorers
                     </Button>
+                    <Button onClick={()=>this.props.handleSelected('compere_players')} className={'blue-button'}>
+                        Compare Players
+                    </Button>
                     <Button onClick={()=>this.props.handleSelected('top_assists')}
                             className={'blue-button'}>
                         Top Assists
-                    </Button>
-                    <Button onClick={()=>this.props.handleSelected('compere_players')} className={'blue-button'}>
-                        Compare Players
                     </Button>
                 </div>
                 <br/>
