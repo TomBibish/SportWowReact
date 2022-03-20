@@ -85,6 +85,20 @@ export  class ComparePlayers extends React.Component{
                           </ListGroup>
                         </Card>
                     </div>
+                        <div className={'float-child'}>
+                            <h1>Compare Players</h1>
+                                <ButtonGroup>
+                                <DropdownButton  id="dropdown-basic-button" title={this.state.player1_name} onSelect={this.handleSelectedPlayer1}>
+                                    {playersObjects}
+                                </DropdownButton>
+                                    <Button  className={'blue-button'} onClick={()=>this.GetPlayersDetails()}>
+                                        Compare
+                                    </Button>
+                                <DropdownButton  id="dropdown-basic-button" title={this.state.player2_name} onSelect={this.handleSelectedPlayer2}>
+                                    {playersObjects}
+                                </DropdownButton>
+                                </ButtonGroup>
+                        </div>
                     <div className={'float-child'}>
                         <Card style={{ width: '18rem', height:'26rem' }} className={'blue-button'}>
                           <Card.Img variant="top" src={this.state.player2_details.picture} />
@@ -108,20 +122,6 @@ export  class ComparePlayers extends React.Component{
                           </ListGroup>
                         </Card>
                     </div>
-                        <div className={'float-child'}>
-                            <h1>Compare Players</h1>
-                                <ButtonGroup>
-                                <DropdownButton  id="dropdown-basic-button" title={this.state.player1_name} onSelect={this.handleSelectedPlayer1}>
-                                    {playersObjects}
-                                </DropdownButton>
-                                    <Button  className={'blue-button'} onClick={()=>this.GetPlayersDetails()}>
-                                        Compare
-                                    </Button>
-                                <DropdownButton  id="dropdown-basic-button" title={this.state.player2_name} onSelect={this.handleSelectedPlayer2}>
-                                    {playersObjects}
-                                </DropdownButton>
-                                </ButtonGroup>
-                        </div>
                 </div>
             </div>
         );

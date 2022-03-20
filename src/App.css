@@ -57,7 +57,8 @@
 }
 .float-container {
     margin: auto;
-    padding: 10px;
+    padding: 20px;
+    margin-left: 7%;
 }
 
 .float-child {
@@ -72,6 +73,7 @@
 }
 .blue-button{
      background: linear-gradient(to right,#2e5178 0,#448bc4 71%,#386a9c 100%);
+     color: whitesmoke;
 }
 .blue-tr{
      background: linear-gradient(to right,#2e5178 0,#448bc4 71%,#386a9c 100%);
