@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from "axios";
-import {Card, Carousel, ListGroup, ListGroupItem, Table} from "react-bootstrap";
+import {Card, ListGroup, ListGroupItem, Table} from "react-bootstrap";
 export  class TeamDetails extends React.Component{
     constructor(props) {
         super(props);
