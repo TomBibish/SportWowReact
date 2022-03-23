@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from "axios";
-import {Card, ListGroup, ListGroupItem, Table} from "react-bootstrap";
+import {Card, Container, ListGroup, ListGroupItem, Table} from "react-bootstrap";
+import {useLocation} from "react-router-dom";
 export  class TeamDetails extends React.Component{
     constructor(props) {
         super(props);
@@ -14,26 +15,26 @@ export  class TeamDetails extends React.Component{
         }
     }
     componentDidMount() {
+        console.log(this.props.location.pathname.split('/')[2])
         axios
-            .get('http://127.0.0.1:8000/api/v1/teams/' + this.props.team.replace(" ", "%20"))
+            .get('http://127.0.0.1:8000/api/v1/teams/' + this.props.location.pathname.split('/')[2])
             .then(res => this.setState({
                 team: res.data,
                 stadium: res.data.stadium,
                 league: res.data.league
             }))
         axios
-            .get('http://127.0.0.1:8000/api/v1/team_coach/' + this.props.team.replace(" ", "%20"))
+            .get('http://127.0.0.1:8000/api/v1/team_coach/' + this.props.location.pathname.split('/')[2])
             .then(res => this.setState({
                 coach: res.data.coach}))
         axios
-            .get('http://127.0.0.1:8000/api/v1/stats/crowd_avg?team=' + this.props.team.replace(" ", "%20"))
+            .get('http://127.0.0.1:8000/api/v1/stats/crowd_avg?team=' + this.props.location.pathname.split('/')[2])
             .then(res => this.setState({
                 crowd: res.data[0]}))
         axios
-            .get('http://127.0.0.1:8000/api/v1/teams/'+ this.props.team.replace(" ", "%20") + '/players')
+            .get('http://127.0.0.1:8000/api/v1/teams/'+ this.props.location.pathname.split('/')[2] + '/players')
             .then(res => this.setState({
                 players: res.data}))
-        console.log(this.state.players)
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -58,7 +59,7 @@ export  class TeamDetails extends React.Component{
         let playerObjects = this.state.players.map(
             this.renderPlayer)
         return(
-                <div className={'float-container '}>
+                <Container>
                     <div className={'float-child'}>
                         <Card style={{ width: '18rem', height:'26rem'}}>
                           <Card.Img variant="top" src={this.state.team.picture_url} className={'blue-button'} />
@@ -82,7 +83,8 @@ export  class TeamDetails extends React.Component{
                     </div>
                     <div className={'float-child'}>
                         <Card style={{ width: '18rem', height:'26rem' }} className={'blue-button'}>
-                          <Card.Img variant="top" src={this.state.coach.picture_url} style={{width:'100%', height:'90%'}} />
+                          <Card.Img variant="top" src={this.state.coach.picture_url} style={{width:'100%', height:'90%'}}
+                          className={'blue-button'} />
                             <Card.Text>
                                 <div style={{textAlign: "center"}}>
                              {this.state.coach.first_name} {this.state.coach.last_name}
@@ -126,7 +128,14 @@ export  class TeamDetails extends React.Component{
                     </tbody>
                 </Table>
                     </div>
-                </div>
+                </Container>
         )
     }
 }
+
+export const WrappedTeamDetails = props => {
+
+    const location = useLocation()
+    console.log(location)
+    return <TeamDetails location={location} {...props} />
+  }

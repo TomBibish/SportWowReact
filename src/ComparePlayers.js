@@ -1,6 +1,8 @@
 import React from 'react';
 import axios from "axios";
 import {DropdownButton, Dropdown, Card, ListGroup, ListGroupItem, ButtonGroup, Button} from "react-bootstrap";
+import {useLocation} from "react-router-dom";
+import {LeagueTable} from "./LeagueTable";
 export  class ComparePlayers extends React.Component{
         constructor(props) {
             super(props);
@@ -18,13 +20,13 @@ export  class ComparePlayers extends React.Component{
         }
     componentDidMount() {
         axios
-            .get('http://127.0.0.1:8000/api/v1/leagues/'+this.props.league + '/players')
+            .get('http://127.0.0.1:8000/api/v1/leagues/'+this.props.location.pathname.split('/')[2] + '/players')
             .then(res =>this.setState({players:res.data}))
         this.GetPlayersDetails()
     }
     renderPlayer(player){
             return (
-                    <Dropdown.Item eventKey={player.name}>
+                    <Dropdown.Item key={player.id} eventKey={player.name}>
                         {player.name}
                     </Dropdown.Item>
         )
@@ -124,6 +126,13 @@ export  class ComparePlayers extends React.Component{
                     </div>
                 </div>
             </div>
+
         );
     }
 }
+export const WrappedComparePlayers = props => {
+
+    const location = useLocation()
+    console.log(location)
+    return <ComparePlayers location={location} {...props} />
+  }

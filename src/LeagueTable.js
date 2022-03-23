@@ -1,6 +1,8 @@
 import React from 'react';
 import axios from "axios";
-import {Button, ButtonGroup, Table} from "react-bootstrap";
+import {Button, ButtonGroup, Container, Table} from "react-bootstrap";
+import {useLocation} from "react-router-dom";
+import {TeamDetails} from "./TeamDetails";
 export  class LeagueTable extends React.Component{
     constructor(props) {
         super(props);
@@ -11,7 +13,7 @@ export  class LeagueTable extends React.Component{
     componentDidMount() {
 
         axios
-            .get('http://127.0.0.1:8000/api/v1/stats/league_table?league=' +this.props.league)
+            .get('http://127.0.0.1:8000/api/v1/stats/league_table?league=' +this.props.location.pathname.split('/')[2])
             .then(res =>this.setState({league_table:res.data}))
 
     }
@@ -30,16 +32,16 @@ export  class LeagueTable extends React.Component{
         let teamObjects = this.state.league_table.map(
             this.renderTeam)
         return(
-            <>
+            <Container>
                 <div className={'center-buttons'}>
-                    <Button onClick={()=>this.props.handleSelected('top_scorers')}
+                    <Button href={'/league/' + this.props.location.pathname.split('/')[2] + '/top_scorers'}
                              className={'blue-button'}>
                         Top Scorers
                     </Button>
-                    <Button onClick={()=>this.props.handleSelected('compere_players')} className={'blue-button'}>
+                    <Button href={'/league/' + this.props.location.pathname.split('/')[2] + '/compare_players'} className={'blue-button'}>
                         Compare Players
                     </Button>
-                    <Button onClick={()=>this.props.handleSelected('top_assists')}
+                    <Button href={'/league/' + this.props.location.pathname.split('/')[2] + '/top_assists'}
                             className={'blue-button'}>
                         Top Assists
                     </Button>
@@ -60,7 +62,13 @@ export  class LeagueTable extends React.Component{
                     </tbody>
                 </Table>
                 <br/>
-            </>
+            </Container>
         )
     }
 }
+export const WrappedLeagueTable = props => {
+
+    const location = useLocation()
+    console.log(location)
+    return <LeagueTable location={location} {...props} />
+  }

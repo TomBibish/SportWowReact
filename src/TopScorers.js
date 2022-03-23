@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from "axios";
 import {Table} from "react-bootstrap";
+import {useLocation} from "react-router-dom";
 export  class TopScorers extends React.Component{
     constructor(props) {
         super(props);
@@ -10,7 +11,7 @@ export  class TopScorers extends React.Component{
     }
     componentDidMount() {
         axios
-            .get('http://127.0.0.1:8000/api/v1/stats/goals_leader?league=' + this.props.league)
+            .get('http://127.0.0.1:8000/api/v1/stats/goals_leader?league=' + this.props.location.pathname.split('/')[2])
             .then(res =>this.setState({top_scorers:res.data}))
         console.log('top_scorers' + this.state.top_scorers)
 
@@ -51,3 +52,9 @@ export  class TopScorers extends React.Component{
         )
     }
 }
+export const WrappedTopScorers = props => {
+
+    const location = useLocation()
+    console.log(location)
+    return <TopScorers location={location} {...props} />
+  }

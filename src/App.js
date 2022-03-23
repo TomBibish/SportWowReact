@@ -2,29 +2,25 @@
 import './App.css';
 import React from 'react';
 import { Nav, NavDropdown} from "react-bootstrap";
-import {LeagueTable} from "./LeagueTable";
-import {TopScorers} from "./TopScorers";
-import {TopAssists} from "./TopAssists";
+import {LeagueTable, WrappedLeagueTable} from "./LeagueTable";
+import {TopScorers, WrappedTopScorers} from "./TopScorers";
+import {TopAssists, WrappedTopAssists} from "./TopAssists";
 import {Matches} from "./Matches";
 import axios from "axios";
-import {TeamDetails} from "./TeamDetails";
-import {ComparePlayers} from "./ComparePlayers";
+import {TeamDetails, WrappedTeamDetails} from "./TeamDetails";
+import {ComparePlayers, WrappedComparePlayers} from "./ComparePlayers";
 import {LoginForm} from "./LoginForm";
 import {SignoutForm} from "./SignOutForm";
+import {Route, Routes} from "react-router-dom";
 
 class App extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
-            selectedKey: '',
-            selectedTeam: 'HapoelNofHaglil',
             teams:[],
             leagues:[],
-            selectedLeague:1,
+            selectedLeague:'1',
             'show_login_form': false}
-
-        this.handleSelected = this.handleSelected.bind(this)
-        this.handleSelectedTeam = this.handleSelectedTeam.bind(this)
         this.handleSelectedLeague = this.handleSelectedLeague.bind(this)
         this.renderTeam = this.renderTeam.bind(this)
     }
@@ -38,53 +34,23 @@ class App extends React.Component{
     }
     renderTeam(team) {
         return (
-            <NavDropdown.Item eventKey={team.name}>
+            <NavDropdown.Item href={'/team/' + team.name} key={team.id} eventKey={team.name}>
                 {team.name}
             </NavDropdown.Item>
         )
     }
     renderLeague(league) {
         return (
-            <NavDropdown.Item eventKey={league.id}>
+            <NavDropdown.Item href={'/league/' + league.id} key={league.id} eventKey={league.id}>
                 {league.name}
             </NavDropdown.Item>
         )
     }
-    handleSelectedTeam(selected_team){
-        this.setState({selectedKey: selected_team,
-                            selectedTeam: selected_team})
-        }
     handleSelectedLeague(selected_league){
         console.log(selected_league)
-        this.setState({selectedKey: selected_league,
-                            selectedLeague: selected_league})
+        this.setState({selectedLeague: selected_league})
 
         }
-    handleSelected(selectedKey) {
-        console.log(`HandleSelected ${selectedKey}`)
-        this.setState({selectedKey: selectedKey})
-    }
-    renderMainView() {
-        switch (this.state.selectedKey) {
-            case "leagues":
-                return <LeagueTable handleSelected={this.handleSelected}/>
-            case "top_scorers":
-                return <TopScorers league={this.state.selectedLeague} selected_key={this.state.selectedKey}/>
-            case "top_assists":
-                return <TopAssists league={this.state.selectedLeague} selected_key={this.state.selectedKey}/>
-            case "matches":
-                return <Matches/>
-            case "compere_players":
-                return <ComparePlayers league={this.state.selectedLeague} selected_key={this.state.selectedKey}/>
-            case this.state.selectedTeam:
-                return <TeamDetails team={this.state.selectedTeam}/>
-            case this.state.selectedLeague:
-                 return <LeagueTable league = {this.state.selectedLeague} handleSelected={this.handleSelected}/>
-            default:
-                return null
-        }
-    }
-
     render() {
         let teamsObjects = this.state.teams.map(
             this.renderTeam)
@@ -92,9 +58,9 @@ class App extends React.Component{
             this.renderLeague)
          return (
              <>
-                <Nav variant="pills" onSelect={this.handleSelected}>
+                <Nav variant="pills">
                   <Nav.Item>
-                    <Nav.Link href="" disabled={true}>
+                    <Nav.Link disabled={true}>
                       <img className={'home-icon'} alt={''} src={'sport_wow.jpg'}/>
                     </Nav.Link>
                   </Nav.Item>
@@ -104,11 +70,11 @@ class App extends React.Component{
                     </Nav.Link>
                   </Nav.Item>
                   <Nav.Item>
-                    <Nav.Link eventKey="matches"  title="Item">
+                    <Nav.Link href={'/matches'} eventKey="matches"  title="Item">
                       Matches
                     </Nav.Link>
                   </Nav.Item>
-                  <NavDropdown title="Teams" id="nav-dropdown" onSelect={this.handleSelectedTeam}>
+                  <NavDropdown title="Teams" id="nav-dropdown">
                       {teamsObjects}
                   </NavDropdown>
                   <NavDropdown title="Tables" id="nav-dropdown" onSelect={this.handleSelectedLeague}>
@@ -117,11 +83,16 @@ class App extends React.Component{
                     <SignoutForm/>
                 </Nav>
                  <br/>
-                {this.renderMainView()}
                  <LoginForm show={this.state.show_login_form} onHide={() => this.setState({show_login_form: false})}/>
-
+                 <Routes>
+                     <Route path="/matches" element={<Matches />} />
+                     <Route path="/league/:league_id" element={<WrappedLeagueTable league = {this.state.selectedLeague}/>} />
+                     <Route path="/league/:league_id/top_scorers" element={<WrappedTopScorers  league={this.state.selectedLeague} />}/>
+                     <Route path="/league/:league_id/top_assists" element={<WrappedTopAssists  league={this.state.selectedLeague}/>}/>
+                     <Route path="/league/:league_id/compare_players" element={<WrappedComparePlayers/>}/>
+                     <Route path="/team/:team_name" element={<WrappedTeamDetails/>}/>
+                 </Routes>
              </>
-
         )
     }
 }
