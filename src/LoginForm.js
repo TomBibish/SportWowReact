@@ -24,6 +24,10 @@ export class LoginForm extends React.Component {
         .then(result => {
             window.localStorage.setItem("token", result.data.token)
             console.log(result)
+            const token = window.localStorage.getItem('token')
+            axios
+            .get('http://127.0.0.1:8000/api/v1/users/current', {headers: {Authorization: 'Token ' + token}})
+            .then(res =>this.props.handleUser(res.data))
         })
         .catch(error => window.alert(error))
         this.props.onHide()

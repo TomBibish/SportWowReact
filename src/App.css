@@ -83,3 +83,8 @@
      background: linear-gradient(to left,#2e5178 0,#448bc4 71%,#386a9c 100%);
      color: whitesmoke;
 }
+.center-button {
+  margin: auto;
+  width: 35%;
+  padding: 10px;
+}

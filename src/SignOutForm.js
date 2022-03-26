@@ -18,6 +18,8 @@ export class SignoutForm extends React.Component {
                     console.log('Token Removed')
                     axios.get('http://127.0.0.1:8000/api/v1/sign_out', {headers: headers})
                     window.alert('Signed Out Successfully')
+                    this.props.handleUser({})
+                    this.props.handleLogin(false)
                 }
                 else{
                     window.alert('You have not been signed in')
