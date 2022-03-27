@@ -1,17 +1,18 @@
 import React from 'react';
-import Modal from 'react-bootstrap/Modal';
-import Form from 'react-bootstrap/Form'
 import {Button, Card, CardGroup, Container} from 'react-bootstrap';
 import axios from 'axios';
+import {OrderTicketForm} from "./OrderTicketForm";
 
 export class OrderTickets extends React.Component {
     constructor(props) {
         super(props)
 
         this.state = {
-            tickets:[]
+            tickets:[],
+            ticket_picked:1,
+            showOrderForm:false
         }
-
+        this.handleSubmit = this.handleSubmit.bind(this)
         this.renderTickets = this.renderTickets.bind(this)
     }
     componentDidMount() {
@@ -20,9 +21,12 @@ export class OrderTickets extends React.Component {
             .get('http://127.0.0.1:8000/api/v1/tickets', {headers: {Authorization: 'Token ' + token}})
             .then(res =>this.setState({tickets:res.data}))
     }
+    handleSubmit(ticket_id){
+        this.setState({ticket_picked:ticket_id, showOrderForm:true})
+    }
     renderTickets(ticket){
         return(
-                  <Card border={'primary'} style={{margin:"10px"}}>
+                  <Card key={ticket.id} border={'primary'} style={{margin:"10px"}}>
                     <Card.Img style={{height:"90%"}} variant="top" src={ticket.match.home_team.stadium.picture_url}/>
                     <Card.Body style={{textAlign:"center"}}>
                       <Card.Title><img alt={""} className={"table-icon-league"} src={ticket.match.home_team.picture_url}/>
@@ -37,7 +41,7 @@ export class OrderTickets extends React.Component {
                     </Card.Body>
                     <Card.Footer>
                         <div className={"center-button"}>
-                            <Button>Order for {ticket.price}$</Button>
+                            <Button onClick={()=>this.handleSubmit(ticket.id)}>Order for {ticket.price}$</Button>
                         </div>
                     </Card.Footer>
                   </Card>
@@ -53,7 +57,10 @@ export class OrderTickets extends React.Component {
                 <CardGroup style={{width:"100%"}}>
                     {ticketsObject}
                 </CardGroup>
+                <OrderTicketForm show={this.state.showOrderForm} onHide={() => this.setState({showOrderForm: false})}
+                              ticket_id={this.state.ticket_picked}/>
             </Container>
+
         )
     }
 }
