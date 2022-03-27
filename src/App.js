@@ -14,6 +14,7 @@ import {SignoutForm} from "./SignOutForm";
 import {Route, Routes} from "react-router-dom";
 import {SignUpForm} from "./SignUpForm";
 import {OrderTickets} from "./OrderTickets";
+import {UserTickets} from "./UserTickets";
 
 class App extends React.Component{
     constructor(props) {
@@ -69,14 +70,13 @@ class App extends React.Component{
             this.renderTeam)
         let leagueObjects = this.state.leagues.map(
             this.renderLeague)
-        console.log(window.localStorage.getItem('token'))
          return (
              <>
                 <Nav variant="pills">
                   <Nav.Item>
-                    <Nav.Item disabled={true}>
+                    <Nav.Link href={"/"} >
                       <img className={'home-icon'} alt={''} src={'http://www.up2me.co.il/imgs/9030951.jpg'}/>
-                    </Nav.Item>
+                    </Nav.Link>
                   </Nav.Item>
                     <Nav.Item>
                         {window.localStorage.getItem('token') !== null && <Nav.Link disabled={true}>
@@ -112,7 +112,7 @@ class App extends React.Component{
                     </Nav.Link>
                   </Nav.Item>}
                   {window.localStorage.getItem('token') !== null && <Nav.Item>
-                    <Nav.Link title="Item">
+                    <Nav.Link href={'/ordered_tickets'} title="Item">
                       Your Tickets
                     </Nav.Link>
                   </Nav.Item>}
@@ -130,6 +130,7 @@ class App extends React.Component{
                      <Route path="/league/:league_id/compare_players" element={<WrappedComparePlayers/>}/>
                      <Route path="/team/:team_name" element={<WrappedTeamDetails/>}/>
                      <Route path="/tickets" element={<OrderTickets/>}/>
+                     <Route path="/ordered_tickets" element={<UserTickets userProfile={this.state.userProfile}/>} />
                  </Routes>
              </>
         )
