@@ -2,7 +2,6 @@ import React from 'react';
 import axios from "axios";
 import {Table} from "react-bootstrap";
 import {useLocation} from "react-router-dom";
-import {TopScorers} from "./TopScorers";
 export  class TopAssists extends React.Component{
     constructor(props) {
         super(props);
@@ -19,7 +18,7 @@ export  class TopAssists extends React.Component{
     }
     renderPlayer(player) {
         return (
-            <tr className={'blue-tr'}>
+            <tr key={player.id} className={'blue-tr'}>
                 <td><img className={'rounded-circle table-icon'} src={player.picture} alt={''}/></td>
                 <td>{player.name}</td>
                 <td>{player.team}</td>

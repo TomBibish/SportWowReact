@@ -101,25 +101,25 @@ export  class TeamDetails extends React.Component{
                       <thead>
                         <tr>
                           <th>
-                              <img alt={''} className={'player-table-icon'} src={'https://cdn-icons.flaticon.com/png/128/5281/premium/5281619.png?token=exp=1647464261~hmac=350c3465c65bfac48e8dac60932b3484'}/>
+                              <img alt={''} className={'player-table-icon'} src={'https://img.icons8.com/ios-glyphs/2x/person-male.png'}/>
                           </th>
                           <th>
                               <img alt={''} className={'player-table-icon'} src={'https://cdn-icons-png.flaticon.com/128/27/27221.png'}/>
                           </th>
                           <th>
-                              <img alt={''} className={'player-table-icon'} src={'https://cdn-icons.flaticon.com/png/128/4074/premium/4074301.png?token=exp=1647462875~hmac=7fc8221c173261a5c658b454ed86ce39'}/>
+                              <img alt={''} className={'player-table-icon'} src={'https://img.icons8.com/windows/2x/stadium.png'}/>
                           </th>
                           <th>
                               <img alt={''} className={"player-table-icon"} src={'https://cdn-icons-png.flaticon.com/128/1165/1165218.png'}/>
                           </th>
                           <th>
-                              <img alt={''} className={"player-table-icon"} src={'https://cdn-icons.flaticon.com/png/512/5370/premium/5370178.png?token=exp=1647462396~hmac=ba438e0148d61f096f74e561c8105f9c'}/>
+                              <img alt={''} className={"player-table-icon"} src={'https://img.icons8.com/external-those-icons-fill-those-icons/2x/external-chef-kitchen-those-icons-fill-those-icons.png'}/>
                           </th>
                           <th>
-                              <img alt={''} className={"player-table-icon"} src={'https://cdn-icons.flaticon.com/png/512/5174/premium/5174382.png?token=exp=1647462497~hmac=aa9006958be21691108f58f865f757e4'}/>
+                              <img alt={''} className={"player-table-icon"} src={'https://img.icons8.com/color/2x/soccer-yellow-card.png'}/>
                           </th>
                           <th>
-                              <img alt={''} className={"player-table-icon"} src={'https://cdn-icons.flaticon.com/png/512/5174/premium/5174171.png?token=exp=1647462484~hmac=5668dba2bc6c939f55a5c942267713c9'}/>
+                              <img alt={''} className={"player-table-icon"} src={'https://img.icons8.com/color/2x/foul.png'}/>
                           </th>
                         </tr>
                       </thead>

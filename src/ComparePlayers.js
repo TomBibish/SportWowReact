@@ -1,6 +1,15 @@
 import React from 'react';
 import axios from "axios";
-import {DropdownButton, Dropdown, Card, ListGroup, ListGroupItem, ButtonGroup, Button} from "react-bootstrap";
+import {
+    DropdownButton,
+    Dropdown,
+    Card,
+    ListGroup,
+    ListGroupItem,
+    ButtonGroup,
+    Button,
+    Container
+} from "react-bootstrap";
 import {useLocation} from "react-router-dom";
 import {LeagueTable} from "./LeagueTable";
 export  class ComparePlayers extends React.Component{
@@ -62,7 +71,7 @@ export  class ComparePlayers extends React.Component{
             let playersObjects = this.state.players.map(
             this.renderPlayer)
         return (
-            <div>
+            <Container>
                 <div className={'float-container '}>
                     <div className={'float-child'}>
                         <Card style={{ width: '18rem', height:'26rem' }} className={'blue-button'}>
@@ -125,7 +134,7 @@ export  class ComparePlayers extends React.Component{
                         </Card>
                     </div>
                 </div>
-            </div>
+            </Container>
 
         );
     }

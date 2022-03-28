@@ -38,7 +38,7 @@ export class UserTickets extends React.Component {
     }
     renderTickets(ticket){
         return(
-                  <Card key={ticket.id} border={'primary'} style={{margin:"10px"}}>
+                  <Card key={ticket.id} border={'primary'} style={{margin:"10px"}} className={'card'}>
                     <Card.Img style={{height:"90%"}} variant="top" src={ticket.ticket.match.home_team.stadium.picture_url}/>
                     <Card.Body style={{textAlign:"center"}}>
                       <Card.Title><img alt={""} className={"table-icon-league"} src={ticket.ticket.match.home_team.picture_url}/>

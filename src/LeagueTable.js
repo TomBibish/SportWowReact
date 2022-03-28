@@ -20,7 +20,7 @@ export  class LeagueTable extends React.Component{
     renderTeam(team) {
         return (
             <tr className={'blue-tr'}>
-                <td><img className={'table-icon-league'} src={team.picture} alt={''}/></td>
+                <td><a href={'/team/' + team.name}> <img className={'table-icon-league'} src={team.picture} alt={''}/></a></td>
                 <td>{team.name}</td>
                 <td>{team.points}</td>
                 <td>{team.goals_for}:{team.goals_against}</td>
