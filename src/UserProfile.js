@@ -51,34 +51,38 @@ export class UserProfile extends React.Component {
             let teamsObjects = this.state.teams.map(this.renderTeam)
             return(
                 <Container>
-                    <Form.Group className="mb-3">
+                    <div style={{width:"50%"}} className={"center"}>
                         <Form.Group className="mb-3">
-                        <Form.Label>City</Form.Label>
-                        <Form.Control value={this.state.user_profile.city}
-                                      onChange={(event) =>
-                                      this.setState({user_profile:{ ...this.state.user_profile, city: event.target.value}})}/>
+                            <Form.Group className="mb-3">
+                            <Form.Label>City</Form.Label>
+                            <Form.Control value={this.state.user_profile.city}
+                                          onChange={(event) =>
+                                          this.setState({user_profile:{ ...this.state.user_profile, city: event.target.value}})}/>
+                          </Form.Group>
+                         <Form.Group className="mb-3">
+                            <Form.Label>Address</Form.Label>
+                            <Form.Control value={this.state.user_profile.address}
+                                          onChange={(event) =>
+                                          this.setState({user_profile:{ ...this.state.user_profile, address: event.target.value}})}/>
+                          </Form.Group>
+                            <Form.Group className="mb-3">
+                            <Form.Label>Favorite Team</Form.Label>
+                            <Form.Select value={this.state.user_profile.favorite_team}
+                            onChange={(event) =>
+                                          this.setState({user_profile:{ ...this.state.user_profile,
+                                                  favorite_team: event.target.value}})}>
+                                <option>Pick favorite team</option>
+                                {teamsObjects}
+                            </Form.Select>
+                          </Form.Group>
+                            <div className={"center"}>
+                              <Button type="submit"
+                                      onClick={()=>this.updateUserProfile(this.state.user_profile)}>
+                                  Update
+                              </Button>
+                            </div>
                       </Form.Group>
-                     <Form.Group className="mb-3">
-                        <Form.Label>Address</Form.Label>
-                        <Form.Control value={this.state.user_profile.address}
-                                      onChange={(event) =>
-                                      this.setState({user_profile:{ ...this.state.user_profile, address: event.target.value}})}/>
-                      </Form.Group>
-                        <Form.Group className="mb-3">
-                        <Form.Label>Favorite Team</Form.Label>
-                        <Form.Select value={this.state.user_profile.favorite_team}
-                        onChange={(event) =>
-                                      this.setState({user_profile:{ ...this.state.user_profile,
-                                              favorite_team: event.target.value}})}>
-                            <option>Pick favorite team</option>
-                            {teamsObjects}
-                        </Form.Select>
-                      </Form.Group>
-                      <Button type="submit"
-                              onClick={()=>this.updateUserProfile(this.state.user_profile)}>
-                          Update
-                      </Button>
-                  </Form.Group>
+                    </div>
                 </Container>
             )
      }
