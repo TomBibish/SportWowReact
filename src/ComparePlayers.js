@@ -74,18 +74,15 @@ export  class ComparePlayers extends React.Component{
             <Container>
                 <div className={'float-container '}>
                     <div className={'float-child'}>
-                        <Card style={{ width: '18rem', height:'26rem' }} className={'blue-button'}>
+                        <Card className={'blue-button'} style={{textAlign:"center"}}>
                           <Card.Img variant="top" src={this.state.player1_details.picture} />
-                          <Card.Body>
-                                <Card.Title>
-                                    {this.state.player1_details.name}
-                                </Card.Title>
-                                <Card.Text>
-                                    {this.state.player1_details.team}
-                                </Card.Text>
-                          </Card.Body>
-                          <ListGroup className="list-group-flush">
-                            <ListGroupItem className={'blue-button'}>Goals - {this.state.player1_details.goals} </ListGroupItem>
+                            <Card.Title>
+                                {this.state.player1_details.name}
+                            </Card.Title>
+                            <Card.Text>
+                                {this.state.player1_details.team}
+                          <ListGroup className="list-group-flush card-image">
+                            <ListGroupItem className={'blue-button'} >Goals - {this.state.player1_details.goals} </ListGroupItem>
                             <ListGroupItem className={'blue-button'}>Assists - {this.state.player1_details.assists}</ListGroupItem>
                             <ListGroupItem className={'blue-button'}>
                                 Yellow Cards - {this.state.player1_details.yellow_cards}
@@ -94,6 +91,28 @@ export  class ComparePlayers extends React.Component{
                                 Red Cards - {this.state.player1_details.red_cards}
                             </ListGroupItem>
                           </ListGroup>
+                             </Card.Text>
+                        </Card>
+                    </div>
+                    <div className={'float-child'}>
+                        <Card className={'blue-button'} style={{textAlign:"center"}}>
+                          <Card.Img variant="top" src={this.state.player2_details.picture} />
+                            <Card.Title>
+                                {this.state.player2_details.name}
+                            </Card.Title>
+                            <Card.Text>
+                                {this.state.player2_details.team}
+                          <ListGroup className="list-group-flush card-image">
+                            <ListGroupItem className={'blue-button'} >Goals - {this.state.player2_details.goals} </ListGroupItem>
+                            <ListGroupItem className={'blue-button'}>Assists - {this.state.player2_details.assists}</ListGroupItem>
+                            <ListGroupItem className={'blue-button'}>
+                                Yellow Cards - {this.state.player2_details.yellow_cards}
+                            </ListGroupItem>
+                              <ListGroupItem className={'blue-button'}>
+                                Red Cards - {this.state.player2_details.red_cards}
+                            </ListGroupItem>
+                          </ListGroup>
+                             </Card.Text>
                         </Card>
                     </div>
                         <div className={'float-child'}>
@@ -110,29 +129,6 @@ export  class ComparePlayers extends React.Component{
                                 </DropdownButton>
                                 </ButtonGroup>
                         </div>
-                    <div className={'float-child'}>
-                        <Card style={{ width: '18rem', height:'26rem' }} className={'blue-button'}>
-                          <Card.Img variant="top" src={this.state.player2_details.picture} />
-                          <Card.Body>
-                            <Card.Title>
-                                {this.state.player2_details.name}
-                            </Card.Title>
-                            <Card.Text>
-                                {this.state.player2_details.team}
-                            </Card.Text>
-                          </Card.Body >
-                          <ListGroup className="list-group-flush">
-                            <ListGroupItem className={'blue-button'} >Goals - {this.state.player2_details.goals} </ListGroupItem>
-                            <ListGroupItem className={'blue-button'}>Assists - {this.state.player2_details.assists}</ListGroupItem>
-                            <ListGroupItem className={'blue-button'}>
-                                Yellow Cards - {this.state.player2_details.yellow_cards}
-                            </ListGroupItem>
-                              <ListGroupItem className={'blue-button'}>
-                                Red Cards - {this.state.player2_details.red_cards}
-                            </ListGroupItem>
-                          </ListGroup>
-                        </Card>
-                    </div>
                 </div>
             </Container>
 

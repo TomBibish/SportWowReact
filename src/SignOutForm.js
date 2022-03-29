@@ -29,9 +29,9 @@ export class SignoutForm extends React.Component {
         }
         render() {
     return(
-                  <Nav.Item>
-                    <Nav.Link  title="Item" onClick={this.handleSubmit}>
-                      Sign Out
+                  <Nav.Item style={{marginLeft: 'auto'}}>
+                    <Nav.Link title="Log Out" onClick={this.handleSubmit}>
+                      Log Out <img className={'player-table-icon'} src={'https://cdn-icons-png.flaticon.com/512/3596/3596149.png'}/>
                     </Nav.Link>
                   </Nav.Item>
         )}

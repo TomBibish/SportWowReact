@@ -60,37 +60,30 @@ export  class TeamDetails extends React.Component{
             this.renderPlayer)
         return(
                 <Container>
+
                     <div className={'float-child'}>
-                        <Card style={{ width: '18rem', height:'26rem'}}>
-                          <Card.Img variant="top" src={this.state.team.picture_url} className={'blue-button'} />
-                          <Card.Body className={'blue-button'}>
-                            <Card.Title >{this.state.team.name}</Card.Title>
-                            <Card.Text>
-                              {this.state.team.name} which play in the {this.state.league.name}
-                            </Card.Text>
-                          </Card.Body>
-                          <ListGroup className="list-group-flush">
-                            <ListGroupItem className={'blue-button'}>Points this season: {this.state.team.points}</ListGroupItem>
-                            <ListGroupItem className={'blue-button'}>Goals - {this.state.team.goals_for}:{this.state.team.goals_against}</ListGroupItem>
-                            <ListGroupItem className={'blue-button'}>
-                                Play home games in {this.state.stadium.name} ({this.state.stadium.capacity})
-                            </ListGroupItem>
-                              <ListGroupItem className={'blue-button'}>
-                                Average crowd in games {this.state.crowd.avg}
-                            </ListGroupItem>
-                          </ListGroup>
-                        </Card>
-                    </div>
-                    <div className={'float-child'}>
-                        <Card style={{ width: '18rem', height:'26rem' }} className={'blue-button'}>
-                          <Card.Img variant="top" src={this.state.coach.picture_url} style={{width:'100%', height:'90%'}}
-                          className={'blue-button'} />
+                        <Card className={'blue-button'} style={{textAlign:"center"}}>
+                          <Card.Img  variant="top" src={this.state.coach.picture_url} style={{width:'100%', height:'90%'}}
+                          className={' card-image'} />
                             <Card.Text>
                                 <div style={{textAlign: "center"}}>
                              {this.state.coach.first_name} {this.state.coach.last_name}
                                 <br/>
                                 Active Coach
                                 </div>
+                            </Card.Text>
+                        </Card>
+                    </div>
+                    <div className={'float-child'}>
+                        <Card className={'blue-button'} style={{textAlign:"center"}} >
+                          <Card.Img  variant="top" src={this.state.team.picture_url}  />
+                            <Card.Title>{this.state.team.name}</Card.Title>
+                            <Card.Text>
+                                <p>{this.state.team.name} which play in the {this.state.league.name}</p>
+                                <p>Points this season: {this.state.team.points}</p>
+                                <p>Goals - {this.state.team.goals_for}:{this.state.team.goals_against}</p>
+                                <p>Play home games in {this.state.stadium.name} ({this.state.stadium.capacity})</p>
+                                <p>Average crowd in games {this.state.crowd.avg}</p>
                             </Card.Text>
                         </Card>
                     </div>

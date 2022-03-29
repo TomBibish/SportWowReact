@@ -26,8 +26,8 @@ export class OrderTickets extends React.Component {
     }
     renderTickets(ticket){
         return(
-                  <Card key={ticket.id} border={'primary'} style={{margin:"10px"}}>
-                    <Card.Img style={{width:'100%',height:"80%"}} variant="top" src={ticket.match.home_team.stadium.picture_url}/>
+                  <Card className={'card'} key={ticket.id} border={'primary'}>
+                    <Card.Img className={"card-image"}  style={{width:'100%',height:"80%"}} variant="top" src={ticket.match.home_team.stadium.picture_url}/>
                     <Card.Body style={{textAlign:"center"}}>
                       <Card.Title><img alt={""} className={"table-icon-league"} src={ticket.match.home_team.picture_url}/>
                          <img alt={""} className={"table-icon-league"} src={"https://thumbs.dreamstime.com/b/vs-versus-letters-vector-logo-line-icon-isolated-white-background-vs-versus-symbol-confrontation-opposition-vs-versus-175695319.jpg"}/>

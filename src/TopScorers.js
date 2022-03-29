@@ -19,7 +19,7 @@ export  class TopScorers extends React.Component{
     renderPlayer(player) {
         return (
             <tr key={player.id} className={'blue-tr'}>
-                <td><img className={'rounded-circle table-icon'}  src={player.picture} alt={''}/></td>
+                <td><img className={'rounded-circle table-icon' }   src={player.picture} alt={''}/></td>
                 <td>{player.name}</td>
                 <td>{player.team}</td>
                 <td>{player.goals}</td>

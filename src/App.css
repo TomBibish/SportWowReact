@@ -92,6 +92,17 @@ body {
 }
 .card:hover {
   transform: scale(1.05);
-    border:  3px black;
+    border:  3px #2e5178;
     transition: transform .5s ease;
+    box-shadow: 7px 6px 4px #2e5178;
 }
+.card {
+    border-radius: 25px !important;
+    border: 2px solid #2e5178;
+    margin: 14px;
+}
+.card-image{
+    border-radius: 25px !important;
+    /*border: 2px solid #2e5178;*/
+}
+
