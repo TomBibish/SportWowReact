@@ -35,13 +35,13 @@ export  class LeagueTable extends React.Component{
             <Container>
                 <div className={'center-buttons'}>
                     <Button href={'/league/' + this.props.location.pathname.split('/')[2] + '/top_scorers'}
-                             className={'blue-button'}>
+                             className={'blue-button'} style={{margin:"5px"}}>
                         Top Scorers
                     </Button>
-                    <Button href={'/league/' + this.props.location.pathname.split('/')[2] + '/compare_players'} className={'blue-button'}>
+                    <Button style={{margin:"5px"}} href={'/league/' + this.props.location.pathname.split('/')[2] + '/compare_players'} className={'blue-button'}>
                         Compare Players
                     </Button>
-                    <Button href={'/league/' + this.props.location.pathname.split('/')[2] + '/top_assists'}
+                    <Button style={{margin:"5px"}} href={'/league/' + this.props.location.pathname.split('/')[2] + '/top_assists'}
                             className={'blue-button'}>
                         Top Assists
                     </Button>

@@ -54,6 +54,7 @@ export class OrderTickets extends React.Component {
         )
         return(
             <Container>
+                <br/>
                 <CardGroup style={{width:"100%"}}>
                     {ticketsObject}
                 </CardGroup>

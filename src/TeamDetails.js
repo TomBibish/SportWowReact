@@ -60,7 +60,7 @@ export  class TeamDetails extends React.Component{
             this.renderPlayer)
         return(
                 <Container>
-
+                    <br/>
                     <div className={'float-child'}>
                         <Card className={'blue-button'} style={{textAlign:"center"}}>
                           <Card.Img  variant="top" src={this.state.coach.picture_url} style={{width:'100%', height:'90%'}}
@@ -88,6 +88,7 @@ export  class TeamDetails extends React.Component{
                         </Card>
                     </div>
                     <div className={'float-child'}>
+                        <br/>
                                 <Table style={{'textAlign': 'center',
                                     'border': this.state.team.color1,
                                 'color':this.state.team.color2}} bordered hover>

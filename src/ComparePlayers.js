@@ -82,12 +82,12 @@ export  class ComparePlayers extends React.Component{
                             <Card.Text>
                                 {this.state.player1_details.team}
                           <ListGroup className="list-group-flush card-image">
-                            <ListGroupItem className={'blue-button'} >Goals - {this.state.player1_details.goals} </ListGroupItem>
-                            <ListGroupItem className={'blue-button'}>Assists - {this.state.player1_details.assists}</ListGroupItem>
-                            <ListGroupItem className={'blue-button'}>
+                            <ListGroupItem style={{color:"whitesmoke"}} className={'blue-button'} >Goals - {this.state.player1_details.goals} </ListGroupItem>
+                            <ListGroupItem style={{color:"whitesmoke"}} className={'blue-button'}>Assists - {this.state.player1_details.assists}</ListGroupItem>
+                            <ListGroupItem style={{color:"whitesmoke"}} className={'blue-button'}>
                                 Yellow Cards - {this.state.player1_details.yellow_cards}
                             </ListGroupItem>
-                              <ListGroupItem className={'blue-button'}>
+                              <ListGroupItem style={{color:"whitesmoke"}} className={'blue-button'}>
                                 Red Cards - {this.state.player1_details.red_cards}
                             </ListGroupItem>
                           </ListGroup>
@@ -103,12 +103,12 @@ export  class ComparePlayers extends React.Component{
                             <Card.Text>
                                 {this.state.player2_details.team}
                           <ListGroup className="list-group-flush card-image">
-                            <ListGroupItem className={'blue-button'} >Goals - {this.state.player2_details.goals} </ListGroupItem>
-                            <ListGroupItem className={'blue-button'}>Assists - {this.state.player2_details.assists}</ListGroupItem>
-                            <ListGroupItem className={'blue-button'}>
+                            <ListGroupItem style={{color:"whitesmoke"}} className={'blue-button'} >Goals - {this.state.player2_details.goals} </ListGroupItem>
+                            <ListGroupItem style={{color:"whitesmoke"}} className={'blue-button'}>Assists - {this.state.player2_details.assists}</ListGroupItem>
+                            <ListGroupItem style={{color:"whitesmoke"}} className={'blue-button'}>
                                 Yellow Cards - {this.state.player2_details.yellow_cards}
                             </ListGroupItem>
-                              <ListGroupItem className={'blue-button'}>
+                              <ListGroupItem style={{color:"whitesmoke"}} className={'blue-button'}>
                                 Red Cards - {this.state.player2_details.red_cards}
                             </ListGroupItem>
                           </ListGroup>
@@ -116,7 +116,7 @@ export  class ComparePlayers extends React.Component{
                         </Card>
                     </div>
                         <div className={'float-child'}>
-                            <h1>Compare Players</h1>
+                            <h1 style={{textDecoration:"underline"}}>Compare Players</h1>
                                 <ButtonGroup>
                                 <DropdownButton  id="dropdown-basic-button" title={this.state.player1_name} onSelect={this.handleSelectedPlayer1}>
                                     {playersObjects}
