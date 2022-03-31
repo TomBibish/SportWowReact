@@ -47,7 +47,7 @@ export  class LeagueTable extends React.Component{
                     </Button>
                 </div>
                 <br/>
-                <Table style={{'textAlign': 'center', 'border': "#7A91B1",}}  bordered hover>
+                <Table  style={{'textAlign': 'center', 'border': "#7A91B1",}}  bordered hover>
                       <thead>
                         <tr className={'blue-tr-head'}>
                           <th> </th>
