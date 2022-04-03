@@ -52,11 +52,12 @@ export class UserTickets extends React.Component {
                       </Card.Text>
                     </Card.Body>
                     <Card.Footer>
-                            <div style={{width:"10%", margin: "auto"}}>
-                            <p>{ticket.amount}  X tickets</p>
+                            <div style={{width:"30%", margin: "auto"}}>
+                            <p>{ticket.amount}  X tickets
                                     <Button onClick={()=> this.deleteTicket(ticket.id)} variant="danger">
                                         Cancel
                                     </Button>
+                            </p>
                             </div>
                     </Card.Footer>
                   </Card>

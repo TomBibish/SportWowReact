@@ -51,6 +51,7 @@ export class UserProfile extends React.Component {
             let teamsObjects = this.state.teams.map(this.renderTeam)
             return(
                 <Container>
+                    <h1 className={'the-title'}>User Profile</h1>
                     <div style={{width:"50%"}} className={"center"}>
                         <Form.Group className="mb-3">
                             <Form.Group className="mb-3">

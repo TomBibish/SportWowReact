@@ -116,12 +116,12 @@ export  class ComparePlayers extends React.Component{
                         </Card>
                     </div>
                         <div className={'float-child'}>
-                            <h1 style={{textDecoration:"underline"}}>Compare Players</h1>
+                            <h1 style={{ textAlign:"center"}}>Compare Players</h1>
                                 <ButtonGroup>
                                 <DropdownButton  id="dropdown-basic-button" title={this.state.player1_name} onSelect={this.handleSelectedPlayer1}>
                                     {playersObjects}
                                 </DropdownButton>
-                                    <Button  className={'blue-button'} onClick={()=>this.GetPlayersDetails()}>
+                                    <Button style={{borderRadius:"5px"}} className={'blue-button'} onClick={()=>this.GetPlayersDetails()}>
                                         Compare
                                     </Button>
                                 <DropdownButton  id="dropdown-basic-button" title={this.state.player2_name} onSelect={this.handleSelectedPlayer2}>

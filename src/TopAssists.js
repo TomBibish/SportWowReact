@@ -33,6 +33,7 @@ export  class TopAssists extends React.Component{
         return(
             <>
                 <div className={'center'} style={{'width': '40%'}}>
+                    <h1 className={'the-title'}>Assists Leader</h1>
                     <Table style={{'textAlign': 'center', 'border': "#7A91B1"}}  bordered hover>
                           <thead>
                             <tr className={'blue-tr'}>

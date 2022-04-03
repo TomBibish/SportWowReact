@@ -1,8 +1,7 @@
 import React from 'react';
 import axios from "axios";
-import {Button, ButtonGroup, Container, Table} from "react-bootstrap";
+import {Button, Container, Table} from "react-bootstrap";
 import {useLocation} from "react-router-dom";
-import {TeamDetails} from "./TeamDetails";
 export  class LeagueTable extends React.Component{
     constructor(props) {
         super(props);
@@ -38,7 +37,8 @@ export  class LeagueTable extends React.Component{
                              className={'blue-button'} style={{margin:"5px"}}>
                         Top Scorers
                     </Button>
-                    <Button style={{margin:"5px"}} href={'/league/' + this.props.location.pathname.split('/')[2] + '/compare_players'} className={'blue-button'}>
+                    <Button style={{margin:"5px"}} href={'/league/' + this.props.location.pathname.split('/')[2] + '/compare_players'}
+                            className={'blue-button'}>
                         Compare Players
                     </Button>
                     <Button style={{margin:"5px"}} href={'/league/' + this.props.location.pathname.split('/')[2] + '/top_assists'}

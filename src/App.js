@@ -77,7 +77,7 @@ class App extends React.Component{
                 <Nav variant="pills" className={"nav-bar"}>
                   <Nav.Item>
                     <Nav.Link href={"/"} >
-                      <img className={'home-icon'} alt={''} src={'http://www.up2me.co.il/imgs/9030951.jpg'}/>
+                      <img className={'nav-bar-icon'} alt={''} src={'https://i.postimg.cc/8c8PFdf5/sport-wow.webp'}/>
                     </Nav.Link>
                   </Nav.Item>
                     <Nav.Item >
