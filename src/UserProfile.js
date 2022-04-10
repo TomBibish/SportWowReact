@@ -3,6 +3,8 @@ import axios from "axios";
 import Container from "react-bootstrap/Container";
 import Form from 'react-bootstrap/Form'
 import {Button} from "react-bootstrap";
+import {toast, ToastContainer} from "react-toastify";
+import {BASE_PATH} from "./request_utils";
 
 export class UserProfile extends React.Component {
 
@@ -17,11 +19,11 @@ export class UserProfile extends React.Component {
      componentDidMount() {
          const token = window.localStorage.getItem('token')
          axios
-            .get('http://127.0.0.1:8000/api/v1/stats/league_table?league=1')
+            .get(`${BASE_PATH}/api/v1/teams`)
             .then(res =>this.setState({teams:res.data}))
          if (token) {
              axios
-                 .get('http://127.0.0.1:8000/api/v1/user_profile/current', {headers: {Authorization: 'Token ' + token}})
+                 .get(`${BASE_PATH}/api/v1/user_profile/current`, {headers: {Authorization: 'Token ' + token}})
                  .then(res => this.setState({
                          user_profile: res.data
                      }
@@ -34,23 +36,34 @@ export class UserProfile extends React.Component {
          if(token)
          {
              axios
-            .put('http://127.0.0.1:8000/api/v1/user_profile/current', {profile},{headers: {Authorization: 'Token ' + token}})
+            .put(`${BASE_PATH}/api/v1/user_profile/current`, {profile},{headers: {Authorization: 'Token ' + token}})
             .then(res => this.setState({
                 user_profile: res.data}
             )
             )
          }
-         window.alert('Updated Successfully')
+         toast.success('Updated Successfully')
      }
      renderTeam(team){
             return(
-             <option value={team.id}>{team.name}</option>
+             <option value={team.name}>{team.name}</option>
             )
      }
      render() {
             let teamsObjects = this.state.teams.map(this.renderTeam)
             return(
                 <Container>
+                <ToastContainer
+                    position="top-center"
+                    autoClose={3000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                />
                     <h1 className={'the-title'}>User Profile</h1>
                     <div style={{width:"50%"}} className={"center"}>
                         <Form.Group className="mb-3">
@@ -79,7 +92,7 @@ export class UserProfile extends React.Component {
                             <div className={"center"}>
                               <Button type="submit"
                                       onClick={()=>this.updateUserProfile(this.state.user_profile)}>
-                                  Update
+                                  <img className={'player-table-icon'} src={'https://img.icons8.com/external-becris-lineal-becris/2x/external-edit-mintab-for-ios-becris-lineal-becris.png'}/>Update
                               </Button>
                             </div>
                       </Form.Group>

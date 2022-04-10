@@ -17,6 +17,8 @@ import {OrderTickets} from "./OrderTickets";
 import {UserTickets} from "./UserTickets";
 import {UserProfile} from "./UserProfile";
 import {HomePage} from "./HomePage";
+import 'react-toastify/dist/ReactToastify.css';
+import {BASE_PATH} from "./request_utils";
 
 class App extends React.Component{
     constructor(props) {
@@ -31,17 +33,18 @@ class App extends React.Component{
         this.handleSelectedLeague = this.handleSelectedLeague.bind(this)
         this.renderTeam = this.renderTeam.bind(this)
         this.handleUserProfile = this.handleUserProfile.bind(this)
+        this.renderLeagueDropDown = this.renderLeagueDropDown.bind(this)
     }
     componentDidMount() {
         const token = window.localStorage.getItem('token')
         axios
-            .get('http://127.0.0.1:8000/api/v1/users/current', {headers: {Authorization: 'Token ' + token}})
+            .get(`${BASE_PATH}/api/v1/users/current`, {headers: {Authorization: 'Token ' + token}})
             .then(res =>this.setState({userProfile:res.data}))
         axios
-            .get('http://127.0.0.1:8000/api/v1/stats/league_table?league=1')
+            .get(`${BASE_PATH}/api/v1/teams`)
             .then(res =>this.setState({teams:res.data}))
         axios
-            .get('http://127.0.0.1:8000/api/v1/leagues')
+            .get(`${BASE_PATH}/api/v1/leagues`)
             .then(res =>this.setState({leagues:res.data}))
     }
     handleUserProfile(new_user_profile)
@@ -51,15 +54,37 @@ class App extends React.Component{
     renderTeam(team) {
         return (
             <NavDropdown.Item href={'/team/' + team.name} key={team.id} eventKey={team.name}>
-                <img className={'player-table-icon'} src={team.picture}/>{team.name}
+                <img className={'player-table-icon'} src={team.picture_url}/>
+                {team.name}
             </NavDropdown.Item>
         )
     }
     renderLeague(league) {
         return (
             <NavDropdown.Item href={'/league/' + league.id} key={league.id} eventKey={league.id}>
-                <img className={'player-table-icon'} src={league.picture_url}/>{league.name}
+                <img className={'player-table-icon'} src={league.picture_url}/>
+                {league.name}
             </NavDropdown.Item>
+        )
+    }
+    renderLeagueDropDown(league){
+        const teams = []
+        const teamsData = (data) => {teams.push(data.map(this.renderTeam))}
+        axios
+            .get(`${BASE_PATH}/api/v1/leagues/` + league.id)
+            .then(function(response){
+               teamsData(response.data);
+        })
+        return(
+                  <NavDropdown title={
+                                <span style={{color:"black"}}>
+                                    <img alt={''} className={'player-table-icon'}
+                                         src={league.picture_url}/>
+                                    {league.name}
+                                </span>
+                            } id="nav-dropdown" drop={'end'}>
+                      {teams}
+                  </NavDropdown>
         )
     }
     handleSelectedLeague(selected_league){
@@ -68,8 +93,8 @@ class App extends React.Component{
 
         }
     render() {
-        let teamsObjects = this.state.teams.map(
-            this.renderTeam)
+        let teamsObjects = this.state.leagues.map(
+            this.renderLeagueDropDown)
         let leagueObjects = this.state.leagues.map(
             this.renderLeague)
          return (
@@ -102,7 +127,7 @@ class App extends React.Component{
                       <img className={'player-table-icon'} src={'https://img.icons8.com/external-kmg-design-glyph-kmg-design/2x/external-score-board-american-football-kmg-design-glyph-kmg-design.png'}/> Matches
                     </Nav.Link>
                   </Nav.Item>
-                  <NavDropdown     title={
+                  <NavDropdown title={
                                 <span style={{color:"whitesmoke"}}>
                                     <img className={'player-table-icon'} src={'https://img.icons8.com/external-tulpahn-basic-outline-tulpahn/2x/external-football-soccer-tulpahn-basic-outline-tulpahn-5.png'}/> Teams
                                 </span>

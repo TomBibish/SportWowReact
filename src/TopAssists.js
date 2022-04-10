@@ -2,6 +2,7 @@ import React from 'react';
 import axios from "axios";
 import {Table} from "react-bootstrap";
 import {useLocation} from "react-router-dom";
+import {BASE_PATH} from "./request_utils";
 export  class TopAssists extends React.Component{
     constructor(props) {
         super(props);
@@ -11,7 +12,7 @@ export  class TopAssists extends React.Component{
     }
     componentDidMount() {
         axios
-            .get('http://127.0.0.1:8000/api/v1/stats/assists_leader?league=' + this.props.location.pathname.split('/')[2])
+            .get(`${BASE_PATH}/api/v1/stats/assists_leader?league=` + this.props.location.pathname.split('/')[2])
             .then(res =>this.setState({top_assists:res.data}))
         console.log('top_assists' + this.state.top_assists)
 

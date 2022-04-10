@@ -2,6 +2,7 @@ import React from 'react';
 import axios from "axios";
 import {Card, Container, ListGroup, ListGroupItem, Table} from "react-bootstrap";
 import {useLocation} from "react-router-dom";
+import {BASE_PATH} from "./request_utils";
 export  class TeamDetails extends React.Component{
     constructor(props) {
         super(props);
@@ -15,24 +16,23 @@ export  class TeamDetails extends React.Component{
         }
     }
     componentDidMount() {
-        console.log(this.props.location.pathname.split('/')[2])
         axios
-            .get('http://127.0.0.1:8000/api/v1/teams/' + this.props.location.pathname.split('/')[2])
+            .get(`${BASE_PATH}/api/v1/teams/` + this.props.location.pathname.split('/')[2])
             .then(res => this.setState({
                 team: res.data,
                 stadium: res.data.stadium,
                 league: res.data.league
             }))
         axios
-            .get('http://127.0.0.1:8000/api/v1/team_coach/' + this.props.location.pathname.split('/')[2])
+            .get(`${BASE_PATH}/api/v1/team_coach/` + this.props.location.pathname.split('/')[2])
             .then(res => this.setState({
                 coach: res.data.coach}))
         axios
-            .get('http://127.0.0.1:8000/api/v1/stats/crowd_avg?team=' + this.props.location.pathname.split('/')[2])
+            .get(`${BASE_PATH}/api/v1/stats/crowd_avg?team=` + this.props.location.pathname.split('/')[2])
             .then(res => this.setState({
                 crowd: res.data[0]}))
         axios
-            .get('http://127.0.0.1:8000/api/v1/teams/'+ this.props.location.pathname.split('/')[2] + '/players')
+            .get(`${BASE_PATH}/api/v1/teams/`+ this.props.location.pathname.split('/')[2] + '/players')
             .then(res => this.setState({
                 players: res.data}))
     }
@@ -83,13 +83,13 @@ export  class TeamDetails extends React.Component{
                                 <p>Points this season: {this.state.team.points}</p>
                                 <p>Goals - {this.state.team.goals_for}:{this.state.team.goals_against}</p>
                                 <p>Play home games in {this.state.stadium.name} ({this.state.stadium.capacity})</p>
-                                <p>Average crowd in games {this.state.crowd.avg}</p>
+                                {/*<p>Average crowd in games {this.state.crowd.avg}</p>*/}
                             </Card.Text>
                         </Card>
                     </div>
                     <div className={'float-child'}>
                         <br/>
-                                <Table style={{'textAlign': 'center',
+                        <Table style={{'textAlign': 'center',
                                     'border': this.state.team.color1,
                                 'color':this.state.team.color2}} bordered hover>
                       <thead>
@@ -130,6 +130,5 @@ export  class TeamDetails extends React.Component{
 export const WrappedTeamDetails = props => {
 
     const location = useLocation()
-    console.log(location)
     return <TeamDetails location={location} {...props} />
   }

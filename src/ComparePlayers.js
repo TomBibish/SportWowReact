@@ -12,6 +12,8 @@ import {
 } from "react-bootstrap";
 import {useLocation} from "react-router-dom";
 import {LeagueTable} from "./LeagueTable";
+import {toast, ToastContainer} from "react-toastify";
+import {BASE_PATH} from "./request_utils";
 export  class ComparePlayers extends React.Component{
         constructor(props) {
             super(props);
@@ -29,7 +31,7 @@ export  class ComparePlayers extends React.Component{
         }
     componentDidMount() {
         axios
-            .get('http://127.0.0.1:8000/api/v1/leagues/'+this.props.location.pathname.split('/')[2] + '/players')
+            .get(`${BASE_PATH}/api/v1/leagues/`+this.props.location.pathname.split('/')[2] + '/players')
             .then(res =>this.setState({players:res.data}))
         this.GetPlayersDetails()
     }
@@ -53,14 +55,14 @@ export  class ComparePlayers extends React.Component{
     }
     handleSelectedPlayer1(selected_player) {
         if (selected_player === this.state.player2_name) {
-            window.alert("Can't compare the same player")
+            toast.error("Can't compare the same player")
         } else {
             this.setState({player1_name: selected_player})
         }
     }
     handleSelectedPlayer2(selected_player){
             if (selected_player === this.state.player1_name) {
-                window.alert("Can't compare the same player")
+            toast.error("Can't compare the same player")
             }
             else {
                 this.setState({player2_name: selected_player})
@@ -72,6 +74,17 @@ export  class ComparePlayers extends React.Component{
             this.renderPlayer)
         return (
             <Container>
+                <ToastContainer
+                    position="top-center"
+                    autoClose={3000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                />
                 <div className={'float-container '}>
                     <div className={'float-child'}>
                         <Card className={'blue-button'} style={{textAlign:"center"}}>

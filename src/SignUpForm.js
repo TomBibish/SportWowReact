@@ -3,6 +3,7 @@ import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form'
 import { Button } from 'react-bootstrap';
 import axios from 'axios';
+import {BASE_PATH} from "./request_utils";
 
 export class SignUpForm extends React.Component {
     constructor(props) {
@@ -20,7 +21,7 @@ export class SignUpForm extends React.Component {
     }
 
     handleSubmit() {
-        axios.post('http://127.0.0.1:8000/api/v1/register', {
+        axios.post(`${BASE_PATH}/api/v1/register`, {
             username: this.state.username,
             password: this.state.password,
             email: this.state.email,
@@ -30,13 +31,13 @@ export class SignUpForm extends React.Component {
         .then(() => {
             window.alert('Signed Up')
             axios
-                .post('http://127.0.0.1:8000/api/v1/api-token-auth', {
+                .post(`${BASE_PATH}/api/v1/api-token-auth`, {
                     username: this.state.username,
                     password: this.state.password})
                 .then(res=>{window.localStorage.setItem("token", res.data.token)
                     const token = window.localStorage.getItem('token')
             axios
-                .get('http://127.0.0.1:8000/api/v1/users/current', {headers: {Authorization: 'Token ' + token}})
+                .get(`${BASE_PATH}/api/v1/users/current`, {headers: {Authorization: 'Token ' + token}})
                 .then(res =>this.props.handleUser(res.data))})})
         .catch(error => window.alert(error))
         this.props.onHide()

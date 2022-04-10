@@ -2,6 +2,8 @@ import React from 'react';
 import {Button, Card, CardGroup, Container} from 'react-bootstrap';
 import axios from 'axios';
 import {OrderTicketForm} from "./OrderTicketForm";
+import {ToastContainer} from "react-toastify";
+import {BASE_PATH} from "./request_utils";
 
 export class OrderTickets extends React.Component {
     constructor(props) {
@@ -18,7 +20,7 @@ export class OrderTickets extends React.Component {
     componentDidMount() {
         const token = window.localStorage.getItem('token')
         axios
-            .get('http://127.0.0.1:8000/api/v1/tickets', {headers: {Authorization: 'Token ' + token}})
+            .get(`${BASE_PATH}/api/v1/tickets`, {headers: {Authorization: 'Token ' + token}})
             .then(res =>this.setState({tickets:res.data}))
     }
     handleSubmit(ticket_id){
@@ -60,6 +62,7 @@ export class OrderTickets extends React.Component {
                 </CardGroup>
                 <OrderTicketForm show={this.state.showOrderForm} onHide={() => this.setState({showOrderForm: false})}
                               ticket_id={this.state.ticket_picked}/>
+
             </Container>
 
         )

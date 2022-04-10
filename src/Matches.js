@@ -2,6 +2,7 @@ import React from 'react';
 import axios from "axios";
 import {Button, ButtonGroup, Container, Dropdown, DropdownButton, Table} from "react-bootstrap";
 import Pagination from 'react-bootstrap/Pagination'
+import {BASE_PATH} from "./request_utils";
 
 
 export  class Matches extends React.Component{
@@ -17,10 +18,10 @@ export  class Matches extends React.Component{
     componentDidMount() {
          const token = window.localStorage.getItem('token')
         axios
-            .get('http://127.0.0.1:8000/api/v1/matches?round=' + this.state.round, {headers: {Authorization: 'Token ' + token}})
+            .get(`${BASE_PATH}/api/v1/matches?round=` + this.state.round, {headers: {Authorization: 'Token ' + token}})
             .then(res =>this.setState({matches:res.data}))
         axios
-            .get('http://127.0.0.1:8000/api/v1/rounds')
+            .get(`${BASE_PATH}/api/v1/rounds`)
             .then(res =>this.setState({rounds:res.data}))
     }
     renderMatch(match) {

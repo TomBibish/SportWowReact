@@ -1,7 +1,8 @@
 import React from 'react';
 import {Button, Card, CardGroup, Container} from 'react-bootstrap';
 import axios from 'axios';
-
+import {toast, ToastContainer} from "react-toastify";
+import {BASE_PATH} from "./request_utils";
 export class UserTickets extends React.Component {
     constructor(props) {
         super(props)
@@ -16,7 +17,7 @@ export class UserTickets extends React.Component {
     componentDidMount() {
         const token = window.localStorage.getItem('token')
         axios
-            .get('http://127.0.0.1:8000/api/v1/users/current', {headers: {Authorization: 'Token ' + token}})
+            .get(`${BASE_PATH}/api/v1/users/current`, {headers: {Authorization: 'Token ' + token}})
             .then(res => axios
                         .get('http://127.0.0.1:8000/api/v1/ordered_tickets?user=' + res.data.id,
                             {headers: {Authorization: 'Token ' + token}})
@@ -26,15 +27,15 @@ export class UserTickets extends React.Component {
     {
         const token = window.localStorage.getItem('token')
         axios
-            .delete('http://127.0.0.1:8000/api/v1/ordered_tickets/' + ticket_id,{headers: {Authorization: 'Token ' + token}},)
+            .delete(`${BASE_PATH}/api/v1/ordered_tickets/` + ticket_id,{headers: {Authorization: 'Token ' + token}},)
             .then(axios
-                    .get('http://127.0.0.1:8000/api/v1/users/current', {headers: {Authorization: 'Token ' + token}})
+                    .get(`${BASE_PATH}/api/v1/users/current`, {headers: {Authorization: 'Token ' + token}})
                     .then(res => axios
-                        .get('http://127.0.0.1:8000/api/v1/ordered_tickets?user=' + res.data.id,
+                        .get(`${BASE_PATH}/api/v1/ordered_tickets?user=` + res.data.id,
                             {headers: {Authorization: 'Token ' + token}})
                         .then(res =>this.setState({tickets:res.data})))
             )
-        window.alert('Deleted Successfully')
+        toast.success('Deleted Successfully')
     }
     renderTickets(ticket){
         return(
@@ -49,15 +50,15 @@ export class UserTickets extends React.Component {
                           <p>{ticket.ticket.match.home_team.name} VS {ticket.ticket.match.away_team.name}</p>
                           <p>Match from the {ticket.ticket.match.round} round of the {ticket.ticket.match.home_team.league.name}</p>
                           <p>Would play in {ticket.ticket.match.home_team.stadium.name} at {ticket.ticket.match.game_date}</p>
+                          <p>{ticket.amount}  X tickets</p>
                       </Card.Text>
                     </Card.Body>
                     <Card.Footer>
-                            <div style={{width:"30%", margin: "auto"}}>
-                            <p>{ticket.amount}  X tickets
+                            <div className={'center'}>
                                     <Button onClick={()=> this.deleteTicket(ticket.id)} variant="danger">
                                         Cancel
                                     </Button>
-                            </p>
+
                             </div>
                     </Card.Footer>
                   </Card>
@@ -71,6 +72,17 @@ export class UserTickets extends React.Component {
         return(
             <Container>
                 <br/>
+                <ToastContainer
+                    position="top-center"
+                    autoClose={2000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                />
                 <CardGroup style={{width:"100%"}}>
                     {ticketsObject}
                 </CardGroup>
