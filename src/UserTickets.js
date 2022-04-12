@@ -19,7 +19,7 @@ export class UserTickets extends React.Component {
         axios
             .get(`${BASE_PATH}/api/v1/users/current`, {headers: {Authorization: 'Token ' + token}})
             .then(res => axios
-                        .get('http://127.0.0.1:8000/api/v1/ordered_tickets?user=' + res.data.id,
+                        .get(`${BASE_PATH}/api/v1/ordered_tickets?user=` + res.data.id,
                             {headers: {Authorization: 'Token ' + token}})
                         .then(res =>this.setState({tickets:res.data})))
     }

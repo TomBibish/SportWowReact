@@ -47,7 +47,7 @@ export  class ComparePlayers extends React.Component{
             let player1_full_name = this.state.player1_name.split(" ")
             let player2_full_name = this.state.player2_name.split(" ")
           axios
-            .get('http://127.0.0.1:8000/api/v1/stats/compare_players?player1_first_name=' +player1_full_name[0]
+            .get(`${BASE_PATH}/api/v1/stats/compare_players?player1_first_name=` +player1_full_name[0]
                 + '&player1_last_name=' + player1_full_name[1] + '&player2_first_name='
                 +player2_full_name[0] + '&player2_last_name=' +player2_full_name[1] )
             .then(res =>this.setState({player1_details:res.data[0],
