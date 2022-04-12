@@ -154,7 +154,7 @@ class App extends React.Component{
                 </Nav>
                  <LoginForm handleUser={this.handleUserProfile} show={this.state.show_login_form} onHide={() => this.setState({show_login_form: false})}/>
                  <SignUpForm handleUser={this.handleUserProfile} show={this.state.showSignUpForm} onHide={() => this.setState({showSignUpForm: false})}/>
-                 {window.location.href ==='http://localhost:3000/' && <HomePage/>}
+                 {window.location.href ===`${BASE_PATH}` && <HomePage/>}
                  <Routes>
                      <Route path="/matches" element={<Matches />} />
                      <Route path="/league/:league_id" element={<WrappedLeagueTable/>} />
