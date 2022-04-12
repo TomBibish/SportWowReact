@@ -1,1 +1,1 @@
-export const BASE_PATH = 'http://127.0.0.1:8000'
+export const BASE_PATH = 'http://ec2-23-20-72-95.compute-1.amazonaws.com'
