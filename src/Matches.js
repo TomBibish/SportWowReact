@@ -56,7 +56,7 @@ export  class Matches extends React.Component{
     {
         const token = window.localStorage.getItem('token')
         axios
-            .get('http://127.0.0.1:8000/api/v1/matches?round=' + selected_round, {headers: {Authorization: 'Token ' + token}})
+            .get(`${BASE_PATH}/api/v1/matches?round=` + selected_round, {headers: {Authorization: 'Token ' + token}})
             .then(res =>this.setState({matches:res.data}))
     }
 
