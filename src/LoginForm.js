@@ -28,7 +28,9 @@ export class LoginForm extends React.Component {
             const token = window.localStorage.getItem('token')
             axios
             .get(`${BASE_PATH}/api/v1/users/current`, {headers: {Authorization: 'Token ' + token}})
-            .then(res =>this.props.handleUser(res.data))
+            .then(
+                res =>this.props.handleUser(res.data)
+            )
             toast.success("Signed In successfully")
         })
         .catch(error => window.alert(error))
