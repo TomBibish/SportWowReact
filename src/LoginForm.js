@@ -80,7 +80,7 @@ export class LoginForm extends React.Component {
                 </Form>
                 </Modal.Body>
                 <Modal.Footer>
-                <Button variant="secondary" onClick={this.props.onLoginClose}>
+                <Button variant="secondary" onClick={this.props.onHide}>
                     Cancel
                 </Button>
                 <Button variant="primary"
