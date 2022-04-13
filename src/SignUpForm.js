@@ -4,6 +4,7 @@ import Form from 'react-bootstrap/Form'
 import { Button } from 'react-bootstrap';
 import axios from 'axios';
 import {BASE_PATH} from "./request_utils";
+import {toast, ToastContainer} from "react-toastify";
 
 export class SignUpForm extends React.Component {
     constructor(props) {
@@ -29,7 +30,7 @@ export class SignUpForm extends React.Component {
             last_name: this.state.last_name
         })
         .then(() => {
-            window.alert('Signed Up')
+            toast.success("Signed Up successfully")
             axios
                 .post(`${BASE_PATH}/api/v1/api-token-auth`, {
                     username: this.state.username,
@@ -45,70 +46,83 @@ export class SignUpForm extends React.Component {
 
     render () {
         return(
-        <Modal show={this.props.show} onHide={this.props.onHide}>
-        <Modal.Header closeButton>
-        <Modal.Title>SignUp</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-        <Form>
-            <Form.Group className="mb-3">
-                <Form.Label>Username</Form.Label>
-                <Form.Text>
-                    <Form.Control
-                        type="text" placeholder="username"
-                        value={this.state.username}
-                        onChange={(event) => this.setState({username: event.target.value})}/>
-                </Form.Text>
-            </Form.Group>
+            <>
+                <ToastContainer
+                    position="top-center"
+                    autoClose={2000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                />
+                <Modal show={this.props.show} onHide={this.props.onHide}>
+                <Modal.Header closeButton>
+                <Modal.Title>SignUp</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                <Form>
+                    <Form.Group className="mb-3">
+                        <Form.Label>Username</Form.Label>
+                        <Form.Text>
+                            <Form.Control
+                                type="text" placeholder="username"
+                                value={this.state.username}
+                                onChange={(event) => this.setState({username: event.target.value})}/>
+                        </Form.Text>
+                    </Form.Group>
 
-            <Form.Group className="mb-3">
-                <Form.Label>Password</Form.Label>
-                <Form.Text>
-                    <Form.Control
-                        type="password" placeholder="password"
-                        value={this.state.password}
-                        onChange={(event) => this.setState({password: event.target.value})}/>
-                </Form.Text>
-            </Form.Group>
-            <Form.Group className="mb-3">
-                <Form.Label>Email</Form.Label>
-                <Form.Text>
-                    <Form.Control
-                        type="email" placeholder="email"
-                        value={this.state.email}
-                        onChange={(event) => this.setState({email: event.target.value})}/>
-                </Form.Text>
-            </Form.Group>
-                        <Form.Group className="mb-3">
-                <Form.Label>First Name</Form.Label>
-                <Form.Text>
-                    <Form.Control
-                        type="text" placeholder="first name"
-                        value={this.state.first_name}
-                        onChange={(event) => this.setState({first_name: event.target.value})}/>
-                </Form.Text>
-            </Form.Group>
-                        <Form.Group className="mb-3">
-                <Form.Label>Last Name</Form.Label>
-                <Form.Text>
-                    <Form.Control
-                        type="text" placeholder="last name"
-                        value={this.state.last_name}
-                        onChange={(event) => this.setState({last_name: event.target.value})}/>
-                </Form.Text>
-            </Form.Group>
-        </Form>
-        </Modal.Body>
-        <Modal.Footer>
-        <Button variant="secondary" onClick={this.props.onHide}>
-            Cancel
-        </Button>
-        <Button variant="primary"
-            onClick={this.handleSubmit}>
-            Sign In
-        </Button>
-        </Modal.Footer>
-        </Modal>
+                    <Form.Group className="mb-3">
+                        <Form.Label>Password</Form.Label>
+                        <Form.Text>
+                            <Form.Control
+                                type="password" placeholder="password"
+                                value={this.state.password}
+                                onChange={(event) => this.setState({password: event.target.value})}/>
+                        </Form.Text>
+                    </Form.Group>
+                    <Form.Group className="mb-3">
+                        <Form.Label>Email</Form.Label>
+                        <Form.Text>
+                            <Form.Control
+                                type="email" placeholder="email"
+                                value={this.state.email}
+                                onChange={(event) => this.setState({email: event.target.value})}/>
+                        </Form.Text>
+                    </Form.Group>
+                                <Form.Group className="mb-3">
+                        <Form.Label>First Name</Form.Label>
+                        <Form.Text>
+                            <Form.Control
+                                type="text" placeholder="first name"
+                                value={this.state.first_name}
+                                onChange={(event) => this.setState({first_name: event.target.value})}/>
+                        </Form.Text>
+                    </Form.Group>
+                                <Form.Group className="mb-3">
+                        <Form.Label>Last Name</Form.Label>
+                        <Form.Text>
+                            <Form.Control
+                                type="text" placeholder="last name"
+                                value={this.state.last_name}
+                                onChange={(event) => this.setState({last_name: event.target.value})}/>
+                        </Form.Text>
+                    </Form.Group>
+                </Form>
+                </Modal.Body>
+                <Modal.Footer>
+                <Button variant="secondary" onClick={this.props.onHide}>
+                    Cancel
+                </Button>
+                <Button variant="primary"
+                    onClick={this.handleSubmit}>
+                    Sign In
+                </Button>
+                </Modal.Footer>
+                </Modal>
+                </>
         )
 
     }
