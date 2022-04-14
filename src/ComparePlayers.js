@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import axios from "axios";
 import {
     DropdownButton,
@@ -8,12 +8,57 @@ import {
     ListGroupItem,
     ButtonGroup,
     Button,
-    Container
+    Container, FormControl
 } from "react-bootstrap";
 import {useLocation} from "react-router-dom";
 import {LeagueTable} from "./LeagueTable";
 import {toast, ToastContainer} from "react-toastify";
 import {BASE_PATH} from "./request_utils";
+const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
+  <a
+    href=""
+    ref={ref}
+    onClick={(e) => {
+      e.preventDefault();
+      onClick(e);
+    }}
+  >
+    {children}
+    &#x25bc;
+  </a>
+));
+
+// forwardRef again here!
+// Dropdown needs access to the DOM of the Menu to measure it
+const CustomMenu = React.forwardRef(
+  ({ children, style, className, 'aria-labelledby': labeledBy }, ref) => {
+    const [value, setValue] = useState('');
+
+    return (
+      <div
+        ref={ref}
+        style={style}
+        className={className}
+        aria-labelledby={labeledBy}
+      >
+        <FormControl
+          autoFocus
+          className="mx-3 my-2 w-auto"
+          placeholder="Type to filter..."
+          onChange={(e) => setValue(e.target.value)}
+          value={value}
+        />
+        <ul className="list-unstyled">
+          {React.Children.toArray(children).filter(
+            (child) =>
+              !value || child.props.children.toLowerCase().includes(value.toLowerCase()),
+          )}
+        </ul>
+      </div>
+    );
+  },
+);
+
 export  class ComparePlayers extends React.Component{
         constructor(props) {
             super(props);
@@ -55,7 +100,6 @@ export  class ComparePlayers extends React.Component{
     handleSelectedPlayer1(selected_player) {
             let player_name1 = null
             for(let i=0; i < this.state.players.length; i ++) {
-                console.log(this.state.players[i]['id'])
                 if(selected_player==this.state.players[i]['id']) {
                     player_name1 = this.state.players[i]['name']
                 }
@@ -67,16 +111,14 @@ export  class ComparePlayers extends React.Component{
             this.setState({player1_id: selected_player, player1_name:player_name1})
         }
     }
+
     handleSelectedPlayer2(selected_player){
             let player_name2 = null
             for(let i=0; i < this.state.players.length; i ++) {
-                console.log(this.state.players[i]['id'])
                 if(selected_player==this.state.players[i]['id']) {
-                    console.log("in if")
                     player_name2 = this.state.players[i]['name']
                 }
             }
-            console.log(selected_player, this.state.player1_id )
             if (selected_player == this.state.player1_id) {
             toast.error("Can't compare the same player")
             }
@@ -101,63 +143,76 @@ export  class ComparePlayers extends React.Component{
                     draggable
                     pauseOnHover
                 />
-                <div className={'float-container '}>
-                    <div className={'float-child'}>
-                        <Card className={'blue-button'} style={{textAlign:"center"}}>
-                          <Card.Img variant="top" src={this.state.player1_details.picture} />
-                            <Card.Title>
-                                {this.state.player1_details.name}
-                            </Card.Title>
-                            <Card.Text>
-                                {this.state.player1_details.team}
-                          <ListGroup className="list-group-flush card-image">
-                            <ListGroupItem style={{color:"whitesmoke"}} className={'blue-button'} >Goals - {this.state.player1_details.goals} </ListGroupItem>
-                            <ListGroupItem style={{color:"whitesmoke"}} className={'blue-button'}>Assists - {this.state.player1_details.assists}</ListGroupItem>
-                            <ListGroupItem style={{color:"whitesmoke"}} className={'blue-button'}>
-                                Yellow Cards - {this.state.player1_details.yellow_cards}
-                            </ListGroupItem>
-                              <ListGroupItem style={{color:"whitesmoke"}} className={'blue-button'}>
-                                Red Cards - {this.state.player1_details.red_cards}
-                            </ListGroupItem>
-                          </ListGroup>
-                             </Card.Text>
-                        </Card>
-                    </div>
-                    <div className={'float-child'}>
-                        <Card className={'blue-button'} style={{textAlign:"center"}}>
-                          <Card.Img variant="top" src={this.state.player2_details.picture} />
-                            <Card.Title>
-                                {this.state.player2_details.name}
-                            </Card.Title>
-                            <Card.Text>
-                                {this.state.player2_details.team}
-                          <ListGroup className="list-group-flush card-image">
-                            <ListGroupItem style={{color:"whitesmoke"}} className={'blue-button'} >Goals - {this.state.player2_details.goals} </ListGroupItem>
-                            <ListGroupItem style={{color:"whitesmoke"}} className={'blue-button'}>Assists - {this.state.player2_details.assists}</ListGroupItem>
-                            <ListGroupItem style={{color:"whitesmoke"}} className={'blue-button'}>
-                                Yellow Cards - {this.state.player2_details.yellow_cards}
-                            </ListGroupItem>
-                              <ListGroupItem style={{color:"whitesmoke"}} className={'blue-button'}>
-                                Red Cards - {this.state.player2_details.red_cards}
-                            </ListGroupItem>
-                          </ListGroup>
-                             </Card.Text>
-                        </Card>
-                    </div>
+                <div className={'center-compare'}>
+                        <h1 style={{ textAlign:"center"}}>Compare Players</h1>
+                            <ButtonGroup>
+                            <Dropdown  id="dropdown-basic-button" title={this.state.player1_name} onSelect={this.handleSelectedPlayer1}>
+                                <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">
+                                    {this.state.player1_name}
+                                </Dropdown.Toggle>
+                                <Dropdown.Menu as={CustomMenu}>
+                                    {playersObjects}
+                                </Dropdown.Menu>
+                            </Dropdown>
+                                <Button style={{borderRadius:"5px"}} className={'blue-button'} onClick={()=>this.GetPlayersDetails()}>
+                                    Compare
+                                </Button>
+                            <Dropdown  id="dropdown-basic-button" title={this.state.player2_name} onSelect={this.handleSelectedPlayer2}>
+                                <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">
+                                    {this.state.player2_name}
+                                </Dropdown.Toggle>
+                                <Dropdown.Menu as={CustomMenu}>
+                                    {playersObjects}
+                                </Dropdown.Menu>
+                            </Dropdown>
+                            </ButtonGroup>
+                </div>
+                <br/>
+                <div className={'center-100'}>
+                    <div className={'float-container '}>
                         <div className={'float-child'}>
-                            <h1 style={{ textAlign:"center"}}>Compare Players</h1>
-                                <ButtonGroup>
-                                <DropdownButton  id="dropdown-basic-button" title={this.state.player1_name} onSelect={this.handleSelectedPlayer1}>
-                                    {playersObjects}
-                                </DropdownButton>
-                                    <Button style={{borderRadius:"5px"}} className={'blue-button'} onClick={()=>this.GetPlayersDetails()}>
-                                        Compare
-                                    </Button>
-                                <DropdownButton  id="dropdown-basic-button" title={this.state.player2_name} onSelect={this.handleSelectedPlayer2}>
-                                    {playersObjects}
-                                </DropdownButton>
-                                </ButtonGroup>
+                            <Card className={'blue-button'} style={{textAlign:"center"}}>
+                              <Card.Img variant="top" src={this.state.player1_details.picture} />
+                                <Card.Title>
+                                    {this.state.player1_details.name}
+                                </Card.Title>
+                                <Card.Text>
+                                    {this.state.player1_details.team}
+                              <ListGroup className="list-group-flush card-image">
+                                <ListGroupItem style={{color:"whitesmoke"}} className={'blue-button'} >Goals - {this.state.player1_details.goals} </ListGroupItem>
+                                <ListGroupItem style={{color:"whitesmoke"}} className={'blue-button'}>Assists - {this.state.player1_details.assists}</ListGroupItem>
+                                <ListGroupItem style={{color:"whitesmoke"}} className={'blue-button'}>
+                                    Yellow Cards - {this.state.player1_details.yellow_cards}
+                                </ListGroupItem>
+                                  <ListGroupItem style={{color:"whitesmoke"}} className={'blue-button'}>
+                                    Red Cards - {this.state.player1_details.red_cards}
+                                </ListGroupItem>
+                              </ListGroup>
+                                 </Card.Text>
+                            </Card>
                         </div>
+                        <div className={'float-child'}>
+                            <Card className={'blue-button'} style={{textAlign:"center"}}>
+                              <Card.Img variant="top" src={this.state.player2_details.picture} />
+                                <Card.Title>
+                                    {this.state.player2_details.name}
+                                </Card.Title>
+                                <Card.Text>
+                                    {this.state.player2_details.team}
+                              <ListGroup className="list-group-flush card-image">
+                                <ListGroupItem style={{color:"whitesmoke"}} className={'blue-button'} >Goals - {this.state.player2_details.goals} </ListGroupItem>
+                                <ListGroupItem style={{color:"whitesmoke"}} className={'blue-button'}>Assists - {this.state.player2_details.assists}</ListGroupItem>
+                                <ListGroupItem style={{color:"whitesmoke"}} className={'blue-button'}>
+                                    Yellow Cards - {this.state.player2_details.yellow_cards}
+                                </ListGroupItem>
+                                  <ListGroupItem style={{color:"whitesmoke"}} className={'blue-button'}>
+                                    Red Cards - {this.state.player2_details.red_cards}
+                                </ListGroupItem>
+                              </ListGroup>
+                                 </Card.Text>
+                            </Card>
+                        </div>
+                    </div>
                 </div>
             </Container>
 

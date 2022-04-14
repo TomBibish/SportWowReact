@@ -53,6 +53,16 @@
   width: 20%;
   padding: 10px;
 }
+.center-100 {
+  margin: auto;
+  width: 70%;
+  padding: 10px;
+}
+.center-compare{
+  margin: auto;
+  width: 30%;
+  padding: 10px;
+}
 .center-carousal {
   margin: auto;
   width: 80%;
@@ -70,6 +80,11 @@
 
 .float-child {
     width: 33%;
+    float: left;
+    padding: 10px;
+}
+.float-child_49 {
+    width: 40%;
     float: left;
     padding: 10px;
 }
