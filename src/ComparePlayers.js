@@ -32,12 +32,14 @@ export  class ComparePlayers extends React.Component{
 
         }
     componentDidMount() {
+            console.log(`${BASE_PATH}/api/v1/leagues/`+this.props.location.pathname.split('/')[2] + '/players')
         axios
             .get(`${BASE_PATH}/api/v1/leagues/`+this.props.location.pathname.split('/')[2] + '/players')
             .then(res =>this.setState({players:res.data}))
         this.GetPlayersDetails()
     }
     renderPlayer(player){
+            console.log(player)
             return (
                     <Dropdown.Item key={player.id} eventKey={player.id}>
                         {player.name}
