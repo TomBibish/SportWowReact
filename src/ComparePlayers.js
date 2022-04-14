@@ -19,6 +19,8 @@ export  class ComparePlayers extends React.Component{
             super(props);
             this.state = {
                 players: [],
+                player1_name: "Dan Biton",
+                player2_name: "Gabi Kanichowsky",
                 player1_id: 1,
                 player2_id: 2,
                 player1_details:{},
@@ -54,6 +56,7 @@ export  class ComparePlayers extends React.Component{
                                             player2_details:res.data[1]}))
     }
     handleSelectedPlayer1(selected_player) {
+            console.log(selected_player)
         if (selected_player === this.state.player2_id) {
             toast.error("Can't compare the same player")
         } else {
@@ -61,6 +64,7 @@ export  class ComparePlayers extends React.Component{
         }
     }
     handleSelectedPlayer2(selected_player){
+            console.log(selected_player)
             if (selected_player === this.state.player1_id) {
             toast.error("Can't compare the same player")
             }
@@ -70,6 +74,7 @@ export  class ComparePlayers extends React.Component{
         }
 
     render() {
+            console.log(this.state.players)
             let playersObjects = this.state.players.map(
             this.renderPlayer)
         return (
