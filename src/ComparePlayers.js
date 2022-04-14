@@ -32,14 +32,12 @@ export  class ComparePlayers extends React.Component{
 
         }
     componentDidMount() {
-            console.log(`${BASE_PATH}/api/v1/leagues/`+this.props.location.pathname.split('/')[2] + '/players')
         axios
             .get(`${BASE_PATH}/api/v1/leagues/`+this.props.location.pathname.split('/')[2] + '/players')
             .then(res =>this.setState({players:res.data}))
         this.GetPlayersDetails()
     }
     renderPlayer(player){
-            console.log(player)
             return (
                     <Dropdown.Item key={player.id} eventKey={player.id}>
                         {player.name}
@@ -48,9 +46,6 @@ export  class ComparePlayers extends React.Component{
     }
     GetPlayersDetails()
     {
-
-            console.log(`${BASE_PATH}/api/v1/stats/compare_players?player1_id=` +this.state.player1_id
-                + '&player2_id=' + this.state.player2_id)
           axios
             .get(`${BASE_PATH}/api/v1/stats/compare_players?player1_id=` +this.state.player1_id
                 + '&player2_id=' + this.state.player2_id )
@@ -58,25 +53,39 @@ export  class ComparePlayers extends React.Component{
                                             player2_details:res.data[1]}))
     }
     handleSelectedPlayer1(selected_player) {
-            console.log(selected_player)
-        if (selected_player === this.state.player2_id) {
+            let player_name1 = null
+            for(let i=0; i < this.state.players.length; i ++) {
+                console.log(this.state.players[i]['id'])
+                if(selected_player==this.state.players[i]['id']) {
+                    player_name1 = this.state.players[i]['name']
+                }
+            }
+
+        if (selected_player == this.state.player2_id) {
             toast.error("Can't compare the same player")
         } else {
-            this.setState({player1_id: selected_player})
+            this.setState({player1_id: selected_player, player1_name:player_name1})
         }
     }
     handleSelectedPlayer2(selected_player){
-            console.log(selected_player)
-            if (selected_player === this.state.player1_id) {
+            let player_name2 = null
+            for(let i=0; i < this.state.players.length; i ++) {
+                console.log(this.state.players[i]['id'])
+                if(selected_player==this.state.players[i]['id']) {
+                    console.log("in if")
+                    player_name2 = this.state.players[i]['name']
+                }
+            }
+            console.log(selected_player, this.state.player1_id )
+            if (selected_player == this.state.player1_id) {
             toast.error("Can't compare the same player")
             }
             else {
-                this.setState({player2_id: selected_player})
+                this.setState({player2_id: selected_player, player2_name:player_name2 })
             }
         }
 
     render() {
-            console.log(this.state.players)
             let playersObjects = this.state.players.map(
             this.renderPlayer)
         return (
