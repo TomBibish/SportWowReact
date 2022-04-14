@@ -15,6 +15,7 @@ export  class TopScorers extends React.Component{
             .get(`${BASE_PATH}/api/v1/stats/goals_leader?league=` + this.props.location.pathname.split('/')[2])
             .then(res =>this.setState({top_scorers:res.data}))
         console.log('top_scorers' + this.state.top_scorers)
+        console.log(`${BASE_PATH}/api/v1/stats/goals_leader?league=` + this.props.location.pathname.split('/')[2])
 
     }
     renderPlayer(player) {

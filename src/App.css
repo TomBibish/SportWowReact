@@ -82,6 +82,12 @@
      background: linear-gradient(to right,#2e5178 0,#448bc4 71%,#386a9c 100%);
      color: whitesmoke;
 }
+.blue-button-card{
+     background: linear-gradient(to right,#2e5178 0,#448bc4 71%,#386a9c 100%);
+     color: whitesmoke;
+    width: 100%;
+    height: 100%;
+}
 .blue-tr{
      background: linear-gradient(to right,#2e5178 0,#448bc4 71%,#386a9c 100%);
      color: whitesmoke;
@@ -103,6 +109,7 @@ body {
     border:  3px #2e5178;
     transition: transform .5s ease;
     box-shadow: 7px 6px 4px #2e5178;
+
 }
 .symbol:hover {
   transform: scale(1.05);

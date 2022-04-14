@@ -19,8 +19,8 @@ export  class ComparePlayers extends React.Component{
             super(props);
             this.state = {
                 players: [],
-                player1_name: 'Dan Biton',
-                player2_name: 'Gabi Kanichowsky',
+                player1_id: 1,
+                player2_id: 2,
                 player1_details:{},
                 player2_details:{}
             }
@@ -37,35 +37,35 @@ export  class ComparePlayers extends React.Component{
     }
     renderPlayer(player){
             return (
-                    <Dropdown.Item key={player.id} eventKey={player.name}>
+                    <Dropdown.Item key={player.id} eventKey={player.id}>
                         {player.name}
                     </Dropdown.Item>
         )
     }
     GetPlayersDetails()
     {
-            let player1_full_name = this.state.player1_name.split(" ")
-            let player2_full_name = this.state.player2_name.split(" ")
+
+            console.log(`${BASE_PATH}/api/v1/stats/compare_players?player1_id=` +this.state.player1_id
+                + '&player2_id=' + this.state.player2_id)
           axios
-            .get(`${BASE_PATH}/api/v1/stats/compare_players?player1_first_name=` +player1_full_name[0]
-                + '&player1_last_name=' + player1_full_name[1] + '&player2_first_name='
-                +player2_full_name[0] + '&player2_last_name=' +player2_full_name[1] )
+            .get(`${BASE_PATH}/api/v1/stats/compare_players?player1_id=` +this.state.player1_id
+                + '&player2_id=' + this.state.player2_id )
             .then(res =>this.setState({player1_details:res.data[0],
                                             player2_details:res.data[1]}))
     }
     handleSelectedPlayer1(selected_player) {
-        if (selected_player === this.state.player2_name) {
+        if (selected_player === this.state.player2_id) {
             toast.error("Can't compare the same player")
         } else {
-            this.setState({player1_name: selected_player})
+            this.setState({player1_id: selected_player})
         }
     }
     handleSelectedPlayer2(selected_player){
-            if (selected_player === this.state.player1_name) {
+            if (selected_player === this.state.player1_id) {
             toast.error("Can't compare the same player")
             }
             else {
-                this.setState({player2_name: selected_player})
+                this.setState({player2_id: selected_player})
             }
         }
 
