@@ -51,7 +51,7 @@ export class HomePage extends React.Component {
     renderPlayer(player) {
         return (
             <tr>
-                <td><img className={'table-icon-league'} src={player.picture} alt={''}/></td>
+                <td><img className={'table-icon-league'} src={player.picture} alt={''} onError={e => { e.currentTarget.src = "https://cdn.footystats.org/img/players/northern%20ireland-jamal-lewis.png" }}/></td>
                 <td>{player.name}</td>
                 <td>{player.appearances}</td>
                 <td>{player.goals}</td>

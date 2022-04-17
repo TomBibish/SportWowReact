@@ -171,7 +171,8 @@ export  class ComparePlayers extends React.Component{
                     <div className={'float-container '}>
                         <div className={'float-child'}>
                             <Card className={'blue-button'} style={{textAlign:"center"}}>
-                              <Card.Img className={'card-image'} variant="top" src={this.state.player1_details.picture} />
+                              <Card.Img className={'card-image'} variant="top" src={this.state.player1_details.picture}
+                                        onError={e => { e.currentTarget.src = "https://cdn.footystats.org/img/players/northern%20ireland-jamal-lewis.png" }} />
                                 <Card.Title>
                                     {this.state.player1_details.name}
                                 </Card.Title>
@@ -192,7 +193,8 @@ export  class ComparePlayers extends React.Component{
                         </div>
                         <div className={'float-child'}>
                             <Card className={'blue-button'} style={{textAlign:"center"}}>
-                              <Card.Img className={'card-image'} variant="top" src={this.state.player2_details.picture} />
+                              <Card.Img className={'card-image'} variant="top" src={this.state.player2_details.picture}
+                              onError={e => { e.currentTarget.src = "https://cdn.footystats.org/img/players/northern%20ireland-jamal-lewis.png" }}/>
                                 <Card.Title>
                                     {this.state.player2_details.name}
                                 </Card.Title>

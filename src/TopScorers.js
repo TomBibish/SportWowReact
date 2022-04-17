@@ -21,7 +21,7 @@ export  class TopScorers extends React.Component{
     renderPlayer(player) {
         return (
             <tr key={player.id} className={'blue-tr'}>
-                <td><img className={'rounded-circle table-icon' }   src={player.picture} alt={''}/></td>
+                <td><img className={'rounded-circle table-icon' }   src={player.picture} alt={''} onError={e => { e.currentTarget.src = "https://cdn.footystats.org/img/players/northern%20ireland-jamal-lewis.png" }}/></td>
                 <td>{player.name}</td>
                 <td>{player.team}</td>
                 <td>{player.goals}</td>
