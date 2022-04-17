@@ -168,11 +168,10 @@ export  class ComparePlayers extends React.Component{
                             </ButtonGroup>
                 </div>
                 <br/>
-                <div className={'center-100'}>
                     <div className={'float-container '}>
                         <div className={'float-child'}>
                             <Card className={'blue-button'} style={{textAlign:"center"}}>
-                              <Card.Img variant="top" src={this.state.player1_details.picture} />
+                              <Card.Img className={'card-image'} variant="top" src={this.state.player1_details.picture} />
                                 <Card.Title>
                                     {this.state.player1_details.name}
                                 </Card.Title>
@@ -193,7 +192,7 @@ export  class ComparePlayers extends React.Component{
                         </div>
                         <div className={'float-child'}>
                             <Card className={'blue-button'} style={{textAlign:"center"}}>
-                              <Card.Img variant="top" src={this.state.player2_details.picture} />
+                              <Card.Img className={'card-image'} variant="top" src={this.state.player2_details.picture} />
                                 <Card.Title>
                                     {this.state.player2_details.name}
                                 </Card.Title>
@@ -213,7 +212,6 @@ export  class ComparePlayers extends React.Component{
                             </Card>
                         </div>
                     </div>
-                </div>
             </Container>
 
         );
